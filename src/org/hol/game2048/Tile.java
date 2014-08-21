@@ -15,7 +15,7 @@ public class Tile extends Label {
     private boolean merged;
 
     public static Tile newRandomTile() {
-        // TO-DO. Create random value, 90% chance 2, 10% 4
+        // TO-DO. Step 7. Create random value, 90% chance 2, 10% 4
         if(Game2048.STEP>=7){
             return newTile(new Random().nextDouble() < 0.9 ? 2 : 4);
         }
