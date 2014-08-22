@@ -200,8 +200,8 @@ public class GameManager extends Group {
             if(Game2048.STEP>=26){
                 GridOperator.sortGrid(direction);
             }
-            // TO-DO: Step 32. reset points
-            if(Game2048.STEP>=32){
+            // TO-DO: Step 33. reset points
+            if(Game2048.STEP>=33){
                 board.setPoints(0);
             }
             if(Game2048.STEP<45){
@@ -222,8 +222,8 @@ public class GameManager extends Group {
                                 parallelTransition.getChildren().add(animateExistingTile(t, nextLocation));
                                 parallelTransition.getChildren().add(animateMergedTile(tileToBeMerged));
                                 mergedToBeRemoved.add(t);
-                                // TO-DO: Step 32. add points
-                                if(Game2048.STEP>=32){
+                                // TO-DO: Step 33. add points
+                                if(Game2048.STEP>=33){
                                     board.addPoints(tileToBeMerged.getValue());
                                 }
                                 // TO-DO: Step 38. Check for a winning tile
