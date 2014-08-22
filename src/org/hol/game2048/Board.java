@@ -181,7 +181,7 @@ public class Board extends Group {
     }
     private void createGrid() {
         // TO-DO: Step 5. Add 4x4 cells to the gridGroup
-        if(Game2048.STEP>=5){
+        if(Game2048.STEP>=5 && Game2048.STEP<25){
             for(int i=0; i<4; i++){
                 for(int j=0; j<4; j++){
                     gridGroup.getChildren().add(createCell(i, j));
