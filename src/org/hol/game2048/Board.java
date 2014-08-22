@@ -253,8 +253,8 @@ public class Board extends Group {
     }
     
     public void addPoints(int points){
-        // TO-DO: Step 32. add points to score, bind lblScore to gameScore
-        if(Game2048.STEP>=32){
+        // TO-DO: Step 33. add points to score, bind lblScore to gameScore
+        if(Game2048.STEP>=33){
             gameMovePoints.set(gameMovePoints.get() + points);
             gameScoreProperty.set(gameScoreProperty.get() + points);
         }
