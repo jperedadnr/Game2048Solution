@@ -54,7 +54,7 @@
 }
 .game-subtitle {
     -fx-font-size: 40px;
-    -fx-text-fill: #f2b179; // f9f6f2
+    -fx-text-fill: #f2b179; 
     -fx-effect: dropshadow( three-pass-box, rgba(243, 215, 116, 1), 10, 0.5, 0, 0 );
 }
 

@@ -10,10 +10,10 @@ import javafx.scene.control.Label;
  */
 public class Tile extends Label {
     
-    private int value;
-    private Location location;
-    private boolean merged;
-
+    /**
+     *
+     * @return
+     */
     public static Tile newRandomTile() {
         // TO-DO. Step 7. Create random value, 90% chance 2, 10% 4
         if(Game2048.STEP>=7){
@@ -22,9 +22,18 @@ public class Tile extends Label {
         return newTile(2);
     }
     
+    /**
+     *
+     * @param value
+     * @return
+     */
     public static Tile newTile(int value) {
         return new Tile(value);
     }
+    private Location location;
+    private boolean merged;
+
+    private int value;
     
     private Tile(int value) {
         // TO-DO. Step 6. Create tile 
@@ -47,35 +56,71 @@ public class Tile extends Label {
         }
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
+    /**
+     *
+     * @return
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     *
+     * @param location
+     */
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    /**
+     *
+     * @return
+     */
+    public int getValue() {
+        return value;
+    }
+
+    /**
+     *
+     * @param value
+     */
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    /**
+     *
+     * @param anotherTile
+     * @return
+     */
+    public boolean isMergeable(Tile anotherTile) {
+        // TO-DO: Step 27. Check it this.tile can be merged with anotherTile
+        if(Game2048.STEP>=27){
+            return anotherTile != null && getValue()==anotherTile.getValue();
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return
+     */
     public boolean isMerged() {
         return merged;
     }
 
+    /**
+     *
+     * @param merged
+     */
     public void setMerged(boolean merged) {
         this.merged = merged;
     }
 
-    @Override
-    public String toString() {
-        return "Tile{" + "value=" + value + ", location=" + location + ", merged=" + merged + '}';
-    }
-    
+    /**
+     *
+     * @param another
+     */
     public void merge(Tile another) {
         // TO-DO: Step 27. Add to tile's value the value of the tile to be merged to, 
         // set the text with the new value and replace the old style ‘game-title-“-value with the new one
@@ -87,12 +132,10 @@ public class Tile extends Label {
             getStyleClass().add("game-tile-" + value);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Tile{" + "value=" + value + ", location=" + location + ", merged=" + merged + '}';
+    }
     
-    public boolean isMergeable(Tile anotherTile) {
-        // TO-DO: Step 27. Check it this.tile can be merged with anotherTile 
-        if(Game2048.STEP>=27){
-            return anotherTile != null && getValue()==anotherTile.getValue();
-        }
-        return false;
-    }        
 }
