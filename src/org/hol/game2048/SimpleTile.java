@@ -13,13 +13,23 @@ import ar.edu.unrc.tdlearning.perceptron.ntuple.SamplePointState;
  */
 public class SimpleTile implements SamplePointState {
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.value;
-        return hash;
+
+    private int value;
+
+    /**
+     *
+     */
+    public SimpleTile() {
+        this(0);
     }
 
+    /**
+     *
+     * @param num
+     */
+    public SimpleTile(int num) {
+        value = num;
+    }
     @Override
     public boolean equals(Object obj) {
         if ( this == obj ) {
@@ -38,21 +48,17 @@ public class SimpleTile implements SamplePointState {
         return true;
     }
 
-    private int value;
-
-    public SimpleTile() {
-        this(0);
-    }
-
-    public SimpleTile(int num) {
-        value = num;
-    }
-
     /**
      * @return the value
      */
     public int getValue() {
         return value;
+    }
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + this.value;
+        return hash;
     }
 
     boolean isEmpty() {
