@@ -1,11 +1,9 @@
 package org.hol.game2048;
 
 import ar.edu.unrc.tdlearning.perceptron.interfaces.IAction;
-import ar.edu.unrc.tdlearning.perceptron.interfaces.IActor;
-import ar.edu.unrc.tdlearning.perceptron.learning.ActionPrediction;
+import ar.edu.unrc.tdlearning.perceptron.learning.ELearningStyle;
 import ar.edu.unrc.tdlearning.perceptron.learning.FunctionUtils;
-import ar.edu.unrc.tdlearning.perceptron.learning.MaximalListConsumer;
-import static ar.edu.unrc.tdlearning.perceptron.learning.TDLambdaLearning.randomBetween;
+import ar.edu.unrc.tdlearning.perceptron.learning.TDLambdaLearning;
 import ar.edu.unrc.tdlearning.perceptron.ntuple.NTupleSystem;
 import ar.edu.unrc.tdlearning.perceptron.ntuple.SamplePointState;
 import java.io.IOException;
@@ -15,7 +13,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -37,45 +34,21 @@ public class Game2048 extends Application {
      */
     public static final int STEP = 45;
 
+
+    /**
+     *
+     */
+    public static NormalizedField normOutput;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
     }
-
-    /**
-     *
-     */
-    public NormalizedField normOutput;
     private boolean computeParallelBestPossibleAction;
 
     private GameManager gameManager;
     private NTupleSystem nTupleSystem;
-
-    /**
-     *
-     * @param turnInitialState
-     * @param allPossibleActionsFromTurnInitialState
-     * @param player
-     *
-     * @return
-     */
-    public IAction computeBestPossibleAction(NTupleBoard turnInitialState, List<IAction> allPossibleActionsFromTurnInitialState, IActor player) {
-        Stream<IAction> stream;
-        if ( computeParallelBestPossibleAction ) {
-            stream = allPossibleActionsFromTurnInitialState.parallelStream();
-        } else {
-            stream = allPossibleActionsFromTurnInitialState.stream();
-        }
-        List<ActionPrediction> bestActiones
-                = stream
-                .map(possibleAction -> evaluate(turnInitialState, possibleAction, player))
-                .collect(MaximalListConsumer::new, MaximalListConsumer::accept, MaximalListConsumer::combine)
-                .getList();
-        IAction bestAction = bestActiones.get(randomBetween(0, bestActiones.size() - 1)).getAction();
-        return bestAction;
-    }
 
     @Override
     public void init() {
@@ -120,7 +93,7 @@ public class Game2048 extends Application {
         StackPane root = new StackPane();
         // TO-DO: Step 1. Add gameManager to root
         if ( STEP >= 1 ) {
-            gameManager = new GameManager();
+            gameManager = new GameManager(nTupleSystem);
             root.getChildren().add(gameManager);
         }
         Scene scene = new Scene(root, 600, 700);
@@ -138,7 +111,14 @@ public class Game2048 extends Application {
                     gameManager.move(dir);
                 } else if ( keyCode == KeyCode.SPACE ) {
                     List<IAction> possibleActions = gameManager.listAllPossibleActions(gameManager.getNTupleBoard());
-                    Direction bestAction = (Direction) computeBestPossibleAction(gameManager.getNTupleBoard(), possibleActions, null);
+                    Direction bestAction = (Direction) TDLambdaLearning.computeBestPossibleAction(
+                            gameManager,
+                            ELearningStyle.afterState,
+                            gameManager.getNTupleBoard(),
+                            possibleActions,
+                            null,
+                            computeParallelBestPossibleAction,
+                            null);
                     gameManager.move(bestAction);
                 }
             });
@@ -147,20 +127,6 @@ public class Game2048 extends Application {
         primaryStage.setTitle("2048FX");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    /**
-     *
-     * @param turnInitialState
-     * @param action
-     * @param player
-     *
-     * @return
-     */
-    protected ActionPrediction evaluate(NTupleBoard turnInitialState, IAction action, IActor player) {
-        NTupleBoard afterstate = gameManager.computeAfterState(turnInitialState, action);
-        Double output = normOutput.deNormalize(nTupleSystem.getComputation(afterstate)) + afterstate.getPartialScore();
-        return new ActionPrediction(action, output);
     }
 
 }

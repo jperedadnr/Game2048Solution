@@ -1,6 +1,10 @@
 package org.hol.game2048;
 
 import ar.edu.unrc.tdlearning.perceptron.interfaces.IAction;
+import ar.edu.unrc.tdlearning.perceptron.interfaces.IActor;
+import ar.edu.unrc.tdlearning.perceptron.interfaces.IProblemRunner;
+import ar.edu.unrc.tdlearning.perceptron.interfaces.IState;
+import ar.edu.unrc.tdlearning.perceptron.ntuple.NTupleSystem;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toRadians;
@@ -35,7 +39,7 @@ import static org.hol.game2048.NTupleBoard.TILE_NUMBER;
  *
  * @authors bruno.borges@oracle.com @brunoborges & pereda@eii.uva.es @jperedadnr
  */
-public class GameManager extends Group {
+public class GameManager extends Group implements IProblemRunner {
 
     private static void ensureSize(java.util.List<SimpleTile> l, int s) {
         while ( l.size() != s ) {
@@ -48,6 +52,7 @@ public class GameManager extends Group {
     private final List<Location> locations = new ArrayList<>();
     private final Set<Tile> mergedToBeRemoved = new HashSet<>();
     private volatile boolean movingTiles = false;
+    private final NTupleSystem nTupleSystem;
     private final ParallelTransition parallelTransition = new ParallelTransition();
     private int tilesWereMoved = 0;
 
@@ -57,8 +62,12 @@ public class GameManager extends Group {
      * <p>
      * The purpose of the game is sum the value of the tiles up to 2048 points
      * Based on the Javascript version: https://github.com/gabrielecirulli/2048
+     *
+     * @param nTupleSystem
      */
-    public GameManager() {
+    public GameManager(NTupleSystem nTupleSystem) {
+        this.nTupleSystem = nTupleSystem;
+
         // TO-DO: Step 2. Create board and it to gameManager
         if ( Game2048.STEP >= 2 ) {
             board = new Board();
@@ -84,15 +93,9 @@ public class GameManager extends Group {
         }
     }
 
-    /**
-     *
-     * @param state
-     * @param action
-     *
-     * @return
-     */
-    public NTupleBoard computeAfterState(NTupleBoard state, IAction action) {
-        NTupleBoard futureBoard = (NTupleBoard) state.getCopy();
+    @Override
+    public IState computeAfterState(IState turnInitialState, IAction action) {
+        NTupleBoard futureBoard = (NTupleBoard) turnInitialState.getCopy();
         switch ( (Direction) action ) {
             case LEFT: {
                 futureBoard = left(futureBoard);
@@ -126,6 +129,22 @@ public class GameManager extends Group {
         }
         return futureBoard;
     }
+    @Override
+    public Double computeNumericRepresentationFor(Object[] output, IActor actor) {
+        return (Double) output[0];
+    }
+
+    @Override
+    public double denormalizeValueFromPerceptronOutput(Object value) { //TODO esto esta bien que sea Object?
+        return Game2048.normOutput.deNormalize((double) value);
+    }
+
+    @Override
+    public Object[] evaluateBoardWithPerceptron(IState state) {
+        Object[] out = {nTupleSystem.getComputation((NTupleBoard) state)};
+        return out;
+    }
+
 
     /**
      *
@@ -175,28 +194,24 @@ public class GameManager extends Group {
         return board;
     }
 
-    /**
-     *
-     * @param state
-     *
-     * @return
-     */
-    public ArrayList<IAction> listAllPossibleActions(NTupleBoard state) {
+    @Override
+    public ArrayList<IAction> listAllPossibleActions(IState turnInitialState) {
         ArrayList<IAction> actions = new ArrayList<>(4);
-        if ( !state.isTerminalState() ) {
-            NTupleBoard afterstate = computeAfterState(state, Direction.LEFT);
+        NTupleBoard state = (NTupleBoard) turnInitialState;
+        if ( !turnInitialState.isTerminalState() ) {
+            NTupleBoard afterstate = (NTupleBoard) computeAfterState(state, Direction.LEFT);
             if ( !state.isEqual(afterstate) ) {
                 actions.add(Direction.LEFT);
             }
-            afterstate = computeAfterState(state, Direction.RIGHT);
+            afterstate = (NTupleBoard) computeAfterState(state, Direction.RIGHT);
             if ( !state.isEqual(afterstate) ) {
                 actions.add(Direction.RIGHT);
             }
-            afterstate = computeAfterState(state, Direction.UP);
+            afterstate = (NTupleBoard) computeAfterState(state, Direction.UP);
             if ( !state.isEqual(afterstate) ) {
                 actions.add(Direction.UP);
             }
-            afterstate = computeAfterState(state, Direction.DOWN);
+            afterstate = (NTupleBoard) computeAfterState(state, Direction.DOWN);
             if ( !state.isEqual(afterstate) ) {
                 actions.add(Direction.DOWN);
             }
