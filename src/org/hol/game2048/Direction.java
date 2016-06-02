@@ -1,28 +1,27 @@
 package org.hol.game2048;
 
+import ar.edu.unrc.tdlearning.perceptron.interfaces.IAction;
 import javafx.scene.input.KeyCode;
 
 /**
- *  JAVAONE 2014 - Create the Game 2048 with Java 8 and JavaFX [HOL3244]
- *  @authors bruno.borges@oracle.com @brunoborges & pereda@eii.uva.es @jperedadnr
+ * JAVAONE 2014 - Create the Game 2048 with Java 8 and JavaFX [HOL3244]
+ *
+ * @authors bruno.borges@oracle.com @brunoborges & pereda@eii.uva.es @jperedadnr
  */
-public enum Direction {
-    
-    /**
-     *
-     */
-    UP(0, -1), 
+public enum Direction implements IAction {
 
     /**
      *
      */
-    RIGHT(1, 0), 
-
+    UP(0, -1),
     /**
      *
      */
-    DOWN(0, 1), 
-
+    RIGHT(1, 0),
+    /**
+     *
+     */
+    DOWN(0, 1),
     /**
      *
      */
@@ -56,18 +55,19 @@ public enum Direction {
     public String toString() {
         return "Direction{" + "y=" + y + ", x=" + x + "} " + name();
     }
-    
+
     /**
      *
      * @param keyCode
+     *
      * @return
      */
     public static Direction valueFor(KeyCode keyCode) {
         // TO-DO: Step 11. return the direction of the arrow
-        if(Game2048.STEP>=11){
+        if ( Game2048.STEP >= 11 ) {
             return valueOf(keyCode.name());
         }
         return RIGHT;
     }
-    
+
 }
