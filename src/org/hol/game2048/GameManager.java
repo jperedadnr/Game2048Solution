@@ -5,6 +5,7 @@ import ar.edu.unrc.tdlearning.perceptron.interfaces.IActor;
 import ar.edu.unrc.tdlearning.perceptron.interfaces.IProblemRunner;
 import ar.edu.unrc.tdlearning.perceptron.interfaces.IState;
 import ar.edu.unrc.tdlearning.perceptron.ntuple.NTupleSystem;
+import ar.edu.unrc.tdlearning.perceptron.utils.Normalization;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toRadians;
@@ -129,6 +130,7 @@ public class GameManager extends Group implements IProblemRunner {
         }
         return futureBoard;
     }
+
     @Override
     public Double computeNumericRepresentationFor(Object[] output, IActor actor) {
         return (Double) output[0];
@@ -136,7 +138,7 @@ public class GameManager extends Group implements IProblemRunner {
 
     @Override
     public double denormalizeValueFromPerceptronOutput(Object value) { //TODO esto esta bien que sea Object?
-        return Game2048.normOutput.deNormalize((double) value);
+        return Normalization.deNormalize((double) value, Game2048.maxReward, Game2048.minReward, Game2048.activationFunctionMax, Game2048.activationFunctionMin);
     }
 
     @Override
@@ -144,7 +146,6 @@ public class GameManager extends Group implements IProblemRunner {
         Object[] out = {nTupleSystem.getComputation((NTupleBoard) state)};
         return out;
     }
-
 
     /**
      *

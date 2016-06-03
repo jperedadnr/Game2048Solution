@@ -19,8 +19,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.encog.util.arrayutil.NormalizationAction;
-import org.encog.util.arrayutil.NormalizedField;
 
 /**
  * JAVAONE 2014 - Create the Game 2048 with Java 8 and JavaFX [HOL3244]
@@ -34,11 +32,6 @@ public class Game2048 extends Application {
      */
     public static final int STEP = 45;
 
-
-    /**
-     *
-     */
-    public static NormalizedField normOutput;
     /**
      * @param args the command line arguments
      */
@@ -50,6 +43,11 @@ public class Game2048 extends Application {
     private GameManager gameManager;
     private NTupleSystem nTupleSystem;
 
+    public static int maxReward;
+    public static int minReward;
+    public static double activationFunctionMax;
+    public static double activationFunctionMin;
+
     @Override
     public void init() {
         // TO-DO: Step 10. Load font when css is enabled
@@ -60,10 +58,10 @@ public class Game2048 extends Application {
             Function<Double, Double> derivatedActivationFunction = FunctionUtils.derivatedTanh;
             boolean concurrency = false;
             int maxTile = 15;
-            double activationFunctionMax = 1;
-            double activationFunctionMin = -1;
-            int maxReward = 500_000;
-            int minReward = -500_000;
+            activationFunctionMax = 1;
+            activationFunctionMin = -1;
+            maxReward = 500_000;
+            minReward = -500_000;
             int[] nTuplesLenght = new int[17];
             for ( int i = 0; i < 17; i++ ) {
                 nTuplesLenght[i] = 4;
@@ -81,8 +79,6 @@ public class Game2048 extends Application {
                 Logger.getLogger(Game2048.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            normOutput = new NormalizedField(NormalizationAction.Normalize,
-                    null, maxReward, minReward, activationFunctionMax, activationFunctionMin);
             computeParallelBestPossibleAction = false;
         }
     }
