@@ -5,7 +5,7 @@
  */
 package org.hol.game2048;
 
-import ar.edu.unrc.tdlearning.perceptron.ntuple.SamplePointState;
+import ar.edu.unrc.tdlearning.training.ntuple.SamplePointState;
 
 /**
  *

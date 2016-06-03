@@ -1,11 +1,11 @@
 package org.hol.game2048;
 
-import ar.edu.unrc.tdlearning.perceptron.interfaces.IAction;
-import ar.edu.unrc.tdlearning.perceptron.learning.ELearningStyle;
-import ar.edu.unrc.tdlearning.perceptron.learning.FunctionUtils;
-import ar.edu.unrc.tdlearning.perceptron.learning.TDLambdaLearning;
-import ar.edu.unrc.tdlearning.perceptron.ntuple.NTupleSystem;
-import ar.edu.unrc.tdlearning.perceptron.ntuple.SamplePointState;
+import ar.edu.unrc.tdlearning.interfaces.IAction;
+import ar.edu.unrc.tdlearning.learning.ELearningStyle;
+import ar.edu.unrc.tdlearning.learning.FunctionUtils;
+import ar.edu.unrc.tdlearning.learning.TDLambdaLearning;
+import ar.edu.unrc.tdlearning.training.ntuple.NTupleSystem;
+import ar.edu.unrc.tdlearning.training.ntuple.SamplePointState;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,6 +33,26 @@ public class Game2048 extends Application {
     public static final int STEP = 45;
 
     /**
+     *
+     */
+    public static double activationFunctionMax;
+
+    /**
+     *
+     */
+    public static double activationFunctionMin;
+
+    /**
+     *
+     */
+    public static int maxReward;
+
+    /**
+     *
+     */
+    public static int minReward;
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -43,10 +63,6 @@ public class Game2048 extends Application {
     private GameManager gameManager;
     private NTupleSystem nTupleSystem;
 
-    public static int maxReward;
-    public static int minReward;
-    public static double activationFunctionMax;
-    public static double activationFunctionMin;
 
     @Override
     public void init() {

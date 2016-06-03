@@ -1,6 +1,6 @@
 package org.hol.game2048;
 
-import ar.edu.unrc.tdlearning.perceptron.interfaces.IAction;
+import ar.edu.unrc.tdlearning.interfaces.IAction;
 import javafx.scene.input.KeyCode;
 
 /**
