@@ -54,8 +54,8 @@ public class Game2048 extends Application {
         if ( STEP >= 10 ) {
             Font.loadFont(Game2048.class.getResource("ClearSans-Bold.ttf").toExternalForm(), 10.0);
             InputStream perceptronFile = this.getClass().getResourceAsStream("/org/hol/game2048/trainedntuplas/Experiment_TanH_trained.ser");
-            Function<Double, Double> activationFunction = FunctionUtils.tanh;
-            Function<Double, Double> derivatedActivationFunction = FunctionUtils.derivatedTanh;
+            Function<Double, Double> activationFunction = FunctionUtils.TANH;
+            Function<Double, Double> derivatedActivationFunction = FunctionUtils.TANH_DERIVATED;
             boolean concurrency = false;
             int maxTile = 15;
             activationFunctionMax = 1;
