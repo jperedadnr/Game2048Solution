@@ -1,11 +1,11 @@
 package org.hol.game2048;
 
-import ar.edu.unrc.tdlearning.interfaces.IAction;
-import ar.edu.unrc.tdlearning.interfaces.IActor;
-import ar.edu.unrc.tdlearning.interfaces.IProblemRunner;
-import ar.edu.unrc.tdlearning.interfaces.IState;
-import ar.edu.unrc.tdlearning.training.ntuple.NTupleSystem;
-import ar.edu.unrc.tdlearning.utils.Normalization;
+import ar.edu.unrc.coeus.tdlearning.interfaces.IAction;
+import ar.edu.unrc.coeus.tdlearning.interfaces.IActor;
+import ar.edu.unrc.coeus.tdlearning.interfaces.IProblemRunner;
+import ar.edu.unrc.coeus.tdlearning.interfaces.IState;
+import ar.edu.unrc.coeus.tdlearning.training.ntuple.NTupleSystem;
+import ar.edu.unrc.coeus.tdlearning.utils.Normalization;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toRadians;

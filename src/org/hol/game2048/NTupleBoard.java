@@ -18,9 +18,9 @@
  */
 package org.hol.game2048;
 
-import ar.edu.unrc.tdlearning.interfaces.IState;
-import ar.edu.unrc.tdlearning.interfaces.IStateNTuple;
-import ar.edu.unrc.tdlearning.training.ntuple.SamplePointState;
+import ar.edu.unrc.coeus.tdlearning.interfaces.IState;
+import ar.edu.unrc.coeus.tdlearning.interfaces.IStateNTuple;
+import ar.edu.unrc.coeus.tdlearning.training.ntuple.SamplePointState;
 import static java.lang.System.arraycopy;
 import java.util.ArrayList;
 import java.util.Arrays;

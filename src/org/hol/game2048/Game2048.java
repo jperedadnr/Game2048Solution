@@ -1,11 +1,11 @@
 package org.hol.game2048;
 
-import ar.edu.unrc.tdlearning.interfaces.IAction;
-import ar.edu.unrc.tdlearning.learning.ELearningStyle;
-import ar.edu.unrc.tdlearning.learning.FunctionUtils;
-import ar.edu.unrc.tdlearning.learning.TDLambdaLearning;
-import ar.edu.unrc.tdlearning.training.ntuple.NTupleSystem;
-import ar.edu.unrc.tdlearning.training.ntuple.SamplePointState;
+import ar.edu.unrc.coeus.tdlearning.interfaces.IAction;
+import ar.edu.unrc.coeus.tdlearning.learning.ELearningStyle;
+import ar.edu.unrc.coeus.tdlearning.learning.TDLambdaLearning;
+import ar.edu.unrc.coeus.tdlearning.training.ntuple.NTupleSystem;
+import ar.edu.unrc.coeus.tdlearning.training.ntuple.SamplePointState;
+import ar.edu.unrc.coeus.tdlearning.utils.FunctionUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -62,7 +62,6 @@ public class Game2048 extends Application {
 
     private GameManager gameManager;
     private NTupleSystem nTupleSystem;
-
 
     @Override
     public void init() {
