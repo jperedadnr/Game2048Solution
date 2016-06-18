@@ -156,7 +156,8 @@ public class Board extends Group {
      * @param tile
      * @param location
      */
-    public void moveTile(Tile tile, Location location) {
+    public void moveTile(Tile tile,
+            Location location) {
         // TO-DO: Step 8. Translate the tile to the selected location
         if ( Game2048.STEP >= 8 ) {
             double layoutX = location.getLayoutX(CELL_SIZE) - (tile.getMinWidth() / 2);
@@ -175,7 +176,8 @@ public class Board extends Group {
         return resetGame;
     }
 
-    private Rectangle createCell(int i, int j) {
+    private Rectangle createCell(int i,
+            int j) {
         Rectangle cell = null;
         // TO-DO: Step 4. Create a squared rectangle, located over each coordinate (x,y), size CELL_SIZE
         if ( Game2048.STEP >= 4 ) {
@@ -202,10 +204,11 @@ public class Board extends Group {
             }
         } // TO-DO: Step 25. Use traverseGrid
         else if ( Game2048.STEP >= 25 ) {
-            GridOperator.traverseGrid((i, j) -> {
-                gridGroup.getChildren().add(createCell(i, j));
-                return 0;
-            });
+            GridOperator.traverseGrid((i, j) ->
+                    {
+                        gridGroup.getChildren().add(createCell(i, j));
+                        return 0;
+                    });
         }
 
         // TO-DO: Step 10. Load css
@@ -292,19 +295,21 @@ public class Board extends Group {
         // TO-DO: Step 33. bind lblPoints  to gameMovePoints with a “+” prefix, if points>0,
         // and bind the lblScore text property with the gameScore property
         if ( Game2048.STEP >= 33 ) {
-            lblPoints.textProperty().bind(Bindings.createStringBinding(()
-                    -> (gameMovePoints.get() > 0) ? "+".concat(Integer.toString(gameMovePoints.get())) : "",
+            lblPoints.textProperty().bind(Bindings.createStringBinding(() ->
+                    (gameMovePoints.get() > 0) ? "+".concat(Integer.toString(gameMovePoints.get())) : "",
                     gameMovePoints.asObject()));
             lblScore.textProperty().bind(gameScoreProperty.asString());
         }
 
         // TO-DO: Step 34. Center points under vScore
         if ( Game2048.STEP >= 34 ) {
-            lblScore.textProperty().addListener((ov, s, s1) -> {
-                lblPoints.setLayoutX(0);
-                double midScoreX = vScore.localToScene(vScore.getWidth() / 2d, 0).getX();
-                lblPoints.setLayoutX(lblPoints.sceneToLocal(midScoreX, 0).getX() - lblPoints.getWidth() / 2d);
-            });
+            lblScore.textProperty().addListener((ov, s, s1) ->
+                    {
+                        lblPoints.setLayoutX(0);
+                        double midScoreX = vScore.localToScene(vScore.getWidth() / 2d, 0).getX();
+                        lblPoints.setLayoutX(
+                                lblPoints.sceneToLocal(midScoreX, 0).getX() - lblPoints.getWidth() / 2d);
+                    });
         }
         // TO-DO: Step 35. Add a timeline to translate the lblPoints in Y from 20 to 100
         // and reduce its opacity from 1 to 0 in 600 ms.
@@ -340,40 +345,45 @@ public class Board extends Group {
         // In bTry also remove tiles and reset all game properties
         if ( Game2048.STEP >= 39 ) {
             bTry.getStyleClass().add("game-button");
-            bTry.setOnAction(e -> {
-                getChildren().removeAll(overlay, buttonsOverlay);
-                gridGroup.getChildren().removeIf(c -> c instanceof Tile);
-                resetGame.set(false);
-                gameScoreProperty.set(0);
-                gameWonProperty.set(false);
-                gameOverProperty.set(false);
-                resetGame.set(true);
-            });
+            bTry.setOnAction(e ->
+                    {
+                        getChildren().removeAll(overlay, buttonsOverlay);
+                        gridGroup.getChildren().removeIf(c ->
+                                c instanceof Tile);
+                        resetGame.set(false);
+                        gameScoreProperty.set(0);
+                        gameWonProperty.set(false);
+                        gameOverProperty.set(false);
+                        resetGame.set(true);
+                    });
             bContinue.getStyleClass().add("game-button");
-            bContinue.setOnAction(e -> getChildren().removeAll(overlay, buttonsOverlay));
+            bContinue.setOnAction(e ->
+                    getChildren().removeAll(overlay, buttonsOverlay));
         }
         // TO-DO: Step 40. Add listeners to game over, won properties. Set style to
         // overlay, set text and its style, add buttons, and add overlay to board
         if ( Game2048.STEP >= 40 ) {
-            gameOverProperty.addListener((observable, oldValue, newValue) -> {
-                if ( newValue ) {
-                    overlay.getStyleClass().setAll("game-overlay", "game-overlay-over");
-                    lOvrText.setText("Game over!");
-                    lOvrText.getStyleClass().setAll("game-label", "game-lblOver");
-                    buttonsOverlay.getChildren().setAll(bTry);
-                    this.getChildren().addAll(overlay, buttonsOverlay);
-                }
-            });
+            gameOverProperty.addListener((observable, oldValue, newValue) ->
+                    {
+                        if ( newValue ) {
+                            overlay.getStyleClass().setAll("game-overlay", "game-overlay-over");
+                            lOvrText.setText("Game over!");
+                            lOvrText.getStyleClass().setAll("game-label", "game-lblOver");
+                            buttonsOverlay.getChildren().setAll(bTry);
+                            this.getChildren().addAll(overlay, buttonsOverlay);
+                        }
+                    });
 
-            gameWonProperty.addListener((observable, oldValue, newValue) -> {
-                if ( newValue ) {
-                    overlay.getStyleClass().setAll("game-overlay", "game-overlay-won");
-                    lOvrText.setText("You win!");
-                    lOvrText.getStyleClass().setAll("game-label", "game-lblWon");
-                    buttonsOverlay.getChildren().setAll(bContinue, bTry);
-                    this.getChildren().addAll(overlay, buttonsOverlay);
-                }
-            });
+            gameWonProperty.addListener((observable, oldValue, newValue) ->
+                    {
+                        if ( newValue ) {
+                            overlay.getStyleClass().setAll("game-overlay", "game-overlay-won");
+                            lOvrText.setText("You win!");
+                            lOvrText.getStyleClass().setAll("game-label", "game-lblWon");
+                            buttonsOverlay.getChildren().setAll(bContinue, bTry);
+                            this.getChildren().addAll(overlay, buttonsOverlay);
+                        }
+                    });
         }
     }
 }

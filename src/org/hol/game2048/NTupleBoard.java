@@ -101,9 +101,10 @@ public class NTupleBoard implements IStateNTuple {
         copy.setCanMove(isCanMove());
         copy.isFull = isFull;
         copy.availableSpaceList = new ArrayList<>(TILE_NUMBER);
-        availableSpaceList.stream().forEach((space) -> {
-            copy.availableSpaceList.add(space);
-        });
+        availableSpaceList.stream().forEach((space) ->
+                {
+                    copy.availableSpaceList.add(space);
+                });
         copy.needToAddTile = needToAddTile;
         copy.setPartialScore(getPartialScore());
         return copy;
@@ -376,14 +377,14 @@ public class NTupleBoard implements IStateNTuple {
      *
      * @return
      */
-    public SimpleTile tileAt(int x, int y) {
+    public SimpleTile tileAt(int x,
+            int y) {
         return tiles[x + y * 4];
     }
 
     /**
-     * actualizamos la traduccion del tablero como entrada del perceptron,
-     * encriptado y normalizado. Tambien se actualiza el calculo de si este es
-     * un tablero fianl o no.
+     * actualizamos la traduccion del tablero como entrada del perceptron, encriptado y normalizado.
+     * Tambien se actualiza el calculo de si este es un tablero fianl o no.
      */
     public void updateInternalState() {
         availableSpaceList = calculateAvailableSpace();

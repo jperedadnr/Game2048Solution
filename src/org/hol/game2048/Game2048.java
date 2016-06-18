@@ -68,7 +68,8 @@ public class Game2048 extends Application {
         // TO-DO: Step 10. Load font when css is enabled
         if ( STEP >= 10 ) {
             Font.loadFont(Game2048.class.getResource("ClearSans-Bold.ttf").toExternalForm(), 10.0);
-            InputStream perceptronFile = this.getClass().getResourceAsStream("/org/hol/game2048/trainedntuplas/Experiment_TanH_trained.ser");
+            InputStream perceptronFile = this.getClass().getResourceAsStream(
+                    "/org/hol/game2048/trainedntuplas/Experiment_TanH_trained.ser");
             Function<Double, Double> activationFunction = FunctionUtils.TANH;
             Function<Double, Double> derivatedActivationFunction = FunctionUtils.TANH_DERIVATED;
             boolean concurrency = false;
@@ -87,7 +88,8 @@ public class Game2048 extends Application {
             for ( int i = 1; i <= maxTile; i++ ) {
                 allSamplePointStates.add(new SimpleTile((int) Math.pow(2, i)));
             }
-            nTupleSystem = new NTupleSystem(allSamplePointStates, nTuplesLenght, activationFunction, derivatedActivationFunction, concurrency);
+            nTupleSystem = new NTupleSystem(allSamplePointStates, nTuplesLenght, activationFunction,
+                    derivatedActivationFunction, concurrency);
             try {
                 nTupleSystem.load(perceptronFile);
             } catch ( IOException | ClassNotFoundException ex ) {
@@ -115,24 +117,27 @@ public class Game2048 extends Application {
         }
         // TO-DO: Step 14. enable arrow keys to move the tiles
         if ( Game2048.STEP >= 14 ) {
-            scene.setOnKeyPressed(ke -> {
-                KeyCode keyCode = ke.getCode();
-                if ( keyCode.isArrowKey() ) {
-                    Direction dir = Direction.valueFor(keyCode);
-                    gameManager.move(dir);
-                } else if ( keyCode == KeyCode.SPACE ) {
-                    List<IAction> possibleActions = gameManager.listAllPossibleActions(gameManager.getNTupleBoard());
-                    Direction bestAction = (Direction) TDLambdaLearning.computeBestPossibleAction(
-                            gameManager,
-                            ELearningStyle.afterState,
-                            gameManager.getNTupleBoard(),
-                            possibleActions,
-                            null,
-                            computeParallelBestPossibleAction,
-                            null);
-                    gameManager.move(bestAction);
-                }
-            });
+            scene.setOnKeyPressed(ke ->
+                    {
+                        KeyCode keyCode = ke.getCode();
+                        if ( keyCode.isArrowKey() ) {
+                            Direction dir = Direction.valueFor(keyCode);
+                            gameManager.move(dir);
+                        } else if ( keyCode == KeyCode.SPACE ) {
+                            List<IAction> possibleActions = gameManager.listAllPossibleActions(
+                                    gameManager.getNTupleBoard());
+                            Direction bestAction = (Direction) TDLambdaLearning.
+                                    computeBestPossibleAction(
+                                            gameManager,
+                                            ELearningStyle.afterState,
+                                            gameManager.getNTupleBoard(),
+                                            possibleActions,
+                                            null,
+                                            computeParallelBestPossibleAction,
+                                            null);
+                            gameManager.move(bestAction);
+                        }
+                    });
         }
 
         primaryStage.setTitle("2048FX");

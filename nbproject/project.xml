@@ -13,7 +13,7 @@
             </extension>
         </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
-            <name>Game2048Template</name>
+            <name>Game2048-Visual</name>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

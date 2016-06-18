@@ -42,7 +42,8 @@ import static org.hol.game2048.NTupleBoard.TILE_NUMBER;
  */
 public class GameManager extends Group implements IProblemRunner {
 
-    private static void ensureSize(java.util.List<SimpleTile> l, int s) {
+    private static void ensureSize(java.util.List<SimpleTile> l,
+            int s) {
         while ( l.size() != s ) {
             l.add(new SimpleTile());
         }
@@ -58,11 +59,11 @@ public class GameManager extends Group implements IProblemRunner {
     private int tilesWereMoved = 0;
 
     /**
-     * GameManager is a Group containing a Board that holds a grid and the score
-     * a Map holds the location of the tiles in the grid
+     * GameManager is a Group containing a Board that holds a grid and the score a Map holds the
+     * location of the tiles in the grid
      * <p>
-     * The purpose of the game is sum the value of the tiles up to 2048 points
-     * Based on the Javascript version: https://github.com/gabrielecirulli/2048
+     * The purpose of the game is sum the value of the tiles up to 2048 points Based on the
+     * Javascript version: https://github.com/gabrielecirulli/2048
      *
      * @param nTupleSystem
      */
@@ -76,12 +77,13 @@ public class GameManager extends Group implements IProblemRunner {
         }
         // TO-DO: Step 42. Add listener to reset game
         if ( Game2048.STEP >= 42 ) {
-            board.resetGameProperty().addListener((ov, b, b1) -> {
-                if ( b1 ) {
-                    initializeGameGrid();
-                    startGame();
-                }
-            });
+            board.resetGameProperty().addListener((ov, b, b1) ->
+                    {
+                        if ( b1 ) {
+                            initializeGameGrid();
+                            startGame();
+                        }
+                    });
         }
 
         // TO-DO: Step 15. call initilize gameGrid
@@ -95,7 +97,8 @@ public class GameManager extends Group implements IProblemRunner {
     }
 
     @Override
-    public IState computeAfterState(IState turnInitialState, IAction action) {
+    public IState computeAfterState(IState turnInitialState,
+            IAction action) {
         NTupleBoard futureBoard = (NTupleBoard) turnInitialState.getCopy();
         switch ( (Direction) action ) {
             case LEFT: {
@@ -125,20 +128,23 @@ public class GameManager extends Group implements IProblemRunner {
                 break;
             }
             default: {
-                throw new IllegalArgumentException("la accion \"" + action.toString() + "\" no es valida");
+                throw new IllegalArgumentException(
+                        "la accion \"" + action.toString() + "\" no es valida");
             }
         }
         return futureBoard;
     }
 
     @Override
-    public Double computeNumericRepresentationFor(Object[] output, IActor actor) {
+    public Double computeNumericRepresentationFor(Object[] output,
+            IActor actor) {
         return (Double) output[0];
     }
 
     @Override
     public double denormalizeValueFromPerceptronOutput(Object value) { //TODO esto esta bien que sea Object?
-        return Normalization.deNormalize((double) value, Game2048.maxReward, Game2048.minReward, Game2048.activationFunctionMax, Game2048.activationFunctionMin);
+        return Normalization.deNormalize((double) value, Game2048.maxReward, Game2048.minReward,
+                Game2048.activationFunctionMax, Game2048.activationFunctionMin);
     }
 
     @Override
@@ -153,18 +159,20 @@ public class GameManager extends Group implements IProblemRunner {
      */
     public NTupleBoard getNTupleBoard() {
         SimpleTile[] tiles = new SimpleTile[TILE_NUMBER];
-        IntStream.range(0, 4).boxed().forEach(y -> {
-            IntStream.range(0, 4).boxed().forEach(x -> {
-                SimpleTile simpleTile;
-                Tile t = gameGrid.get(new Location(x, y));
-                if ( t == null ) {
-                    simpleTile = new SimpleTile();
-                } else {
-                    simpleTile = new SimpleTile(t.getValue());
-                }
-                tiles[x + y * 4] = simpleTile;
-            });
-        });
+        IntStream.range(0, 4).boxed().forEach(y ->
+                {
+                    IntStream.range(0, 4).boxed().forEach(x ->
+                            {
+                                SimpleTile simpleTile;
+                                Tile t = gameGrid.get(new Location(x, y));
+                                if ( t == null ) {
+                                    simpleTile = new SimpleTile();
+                                } else {
+                                    simpleTile = new SimpleTile(t.getValue());
+                                }
+                                tiles[x + y * 4] = simpleTile;
+                            });
+                });
         NTupleBoard newBoard = new NTupleBoard(tiles);
         newBoard.updateInternalState();
         return newBoard;
@@ -221,9 +229,9 @@ public class GameManager extends Group implements IProblemRunner {
     }
 
     /**
-     * Moves the tiles according to given direction At any move, takes care of
-     * merge tiles, add a new one and perform the required animations It updates
-     * the score and checks if the user won the game or if the game is over
+     * Moves the tiles according to given direction At any move, takes care of merge tiles, add a
+     * new one and perform the required animations It updates the score and checks if the user won
+     * the game or if the game is over
      *
      * @param direction is the selected direction to move the tiles
      */
@@ -241,43 +249,51 @@ public class GameManager extends Group implements IProblemRunner {
         // create new tiles at an offset location if valid (limits, no other tile)
         if ( Game2048.STEP >= 13 && Game2048.STEP < 18 ) {
             List<Tile> tiles = board.getGridGroup().getChildren().stream()
-                    .filter(g -> g instanceof Tile).map(t -> (Tile) t)
+                    .filter(g ->
+                            g instanceof Tile).map(t ->
+                    (Tile) t)
                     .collect(Collectors.toList());
             board.getGridGroup().getChildren().removeAll(tiles);
-            tiles.forEach(t -> {
-                Tile newTile = Tile.newTile(t.getValue());
-                final Location newLoc = t.getLocation().offset(direction);
-                if ( newLoc.isValidFor() && !tiles.stream().filter(t2 -> t2.getLocation().equals(newLoc)).findAny().isPresent() ) {
-                    newTile.setLocation(newLoc);
-                } else {
-                    newTile.setLocation(t.getLocation());
-                }
-                board.addTile(newTile);
-            });
+            tiles.forEach(t ->
+                    {
+                        Tile newTile = Tile.newTile(t.getValue());
+                        final Location newLoc = t.getLocation().offset(direction);
+                        if ( newLoc.isValidFor() && !tiles.stream().filter(t2 ->
+                                t2.getLocation().equals(newLoc)).findAny().isPresent() ) {
+                            newTile.setLocation(newLoc);
+                        } else {
+                            newTile.setLocation(t.getLocation());
+                        }
+                        board.addTile(newTile);
+                    });
         }
         // TO-DO: Step 18. Use gameGrid instead of gridgroup
         // moving the existing tiles to the farthest location, and updating the map.
         // Note: the IntStreams are not well ordered for the moment
         if ( Game2048.STEP >= 18 && Game2048.STEP < 25 ) {
-            IntStream.range(0, 4).boxed().forEach(i -> {
-                IntStream.range(0, 4).boxed().forEach(j -> {
-                    Tile t = gameGrid.get(new Location(i, j));
-                    if ( t != null ) {
-                        final Location newLoc = findFarthestLocation(t.getLocation(), direction);
-                        if ( !newLoc.equals(t.getLocation()) ) {
-                            if ( Game2048.STEP < 20 ) {
-                                board.moveTile(t, newLoc);
-                            } // TO-DO: Step 20. Animate tiles movement
-                            else if ( Game2048.STEP >= 20 ) {
-                                parallelTransition.getChildren().add(animateExistingTile(t, newLoc));
-                            }
-                            gameGrid.put(newLoc, t);
-                            gameGrid.replace(t.getLocation(), null);
-                            t.setLocation(newLoc);
-                        }
-                    }
-                });
-            });
+            IntStream.range(0, 4).boxed().forEach(i ->
+                    {
+                        IntStream.range(0, 4).boxed().forEach(j ->
+                                {
+                                    Tile t = gameGrid.get(new Location(i, j));
+                                    if ( t != null ) {
+                                        final Location newLoc = findFarthestLocation(t.getLocation(),
+                                                direction);
+                                        if ( !newLoc.equals(t.getLocation()) ) {
+                                            if ( Game2048.STEP < 20 ) {
+                                                board.moveTile(t, newLoc);
+                                            } // TO-DO: Step 20. Animate tiles movement
+                                            else if ( Game2048.STEP >= 20 ) {
+                                                parallelTransition.getChildren().add(
+                                                        animateExistingTile(t, newLoc));
+                                            }
+                                            gameGrid.put(newLoc, t);
+                                            gameGrid.replace(t.getLocation(), null);
+                                            t.setLocation(newLoc);
+                                        }
+                                    }
+                                });
+                    });
         }
         // TO-DO: Step 25. Replace the IntStreams with the traverseGrid method
         if ( Game2048.STEP >= 25 ) {
@@ -291,84 +307,100 @@ public class GameManager extends Group implements IProblemRunner {
                 board.setPoints(0);
             }
             if ( Game2048.STEP < 45 ) {
-                tilesWereMoved = GridOperator.traverseGrid((i, j) -> {
-                    Tile t = gameGrid.get(new Location(i, j));
-                    if ( t != null ) {
-                        final Location newLoc = findFarthestLocation(t.getLocation(), direction);
-                        // TO-DO: Step 29. Get tile for an offset, check if it's a valid tile, not merged, and
-                        // check if tiles can be merged
-                        if ( Game2048.STEP >= 29 ) {
-                            Location nextLocation = newLoc.offset(direction);
-                            Tile tileToBeMerged = nextLocation.isValidFor() ? gameGrid.get(nextLocation) : null;
-                            if ( tileToBeMerged != null && !tileToBeMerged.isMerged() && t.isMergeable(tileToBeMerged) ) {
-                                tileToBeMerged.merge(t);
-                                tileToBeMerged.toFront();
-                                gameGrid.put(nextLocation, tileToBeMerged);
-                                gameGrid.replace(t.getLocation(), null);
-                                parallelTransition.getChildren().add(animateExistingTile(t, nextLocation));
-                                parallelTransition.getChildren().add(animateMergedTile(tileToBeMerged));
-                                mergedToBeRemoved.add(t);
-                                // TO-DO: Step 33. add points
-                                if ( Game2048.STEP >= 33 ) {
-                                    board.addPoints(tileToBeMerged.getValue());
-                                }
-                                // TO-DO: Step 38. Check for a winning tile
-                                if ( Game2048.STEP >= 38 ) {
-                                    if ( tileToBeMerged.getValue() == 2048 ) {
-                                        System.out.println("You win!");
-                                        // TO-DO: Step 41. set game win
-                                        if ( Game2048.STEP >= 41 ) {
-                                            board.setGameWin(true);
+                tilesWereMoved = GridOperator.traverseGrid((i, j) ->
+                        {
+                            Tile t = gameGrid.get(new Location(i, j));
+                            if ( t != null ) {
+                                final Location newLoc = findFarthestLocation(t.getLocation(),
+                                        direction);
+                                // TO-DO: Step 29. Get tile for an offset, check if it's a valid tile, not merged, and
+                                // check if tiles can be merged
+                                if ( Game2048.STEP >= 29 ) {
+                                    Location nextLocation = newLoc.offset(direction);
+                                    Tile tileToBeMerged = nextLocation.isValidFor() ? gameGrid.get(
+                                            nextLocation) : null;
+                                    if ( tileToBeMerged != null && !tileToBeMerged.isMerged() && t.
+                                            isMergeable(tileToBeMerged) ) {
+                                        tileToBeMerged.merge(t);
+                                        tileToBeMerged.toFront();
+                                        gameGrid.put(nextLocation, tileToBeMerged);
+                                        gameGrid.replace(t.getLocation(), null);
+                                        parallelTransition.getChildren().add(animateExistingTile(t,
+                                                nextLocation));
+                                        parallelTransition.getChildren().add(animateMergedTile(
+                                                tileToBeMerged));
+                                        mergedToBeRemoved.add(t);
+                                        // TO-DO: Step 33. add points
+                                        if ( Game2048.STEP >= 33 ) {
+                                            board.addPoints(tileToBeMerged.getValue());
                                         }
+                                        // TO-DO: Step 38. Check for a winning tile
+                                        if ( Game2048.STEP >= 38 ) {
+                                            if ( tileToBeMerged.getValue() == 2048 ) {
+                                                System.out.println("You win!");
+                                                // TO-DO: Step 41. set game win
+                                                if ( Game2048.STEP >= 41 ) {
+                                                    board.setGameWin(true);
+                                                }
+                                            }
+                                        }
+                                        return 1;
                                     }
                                 }
-                                return 1;
+                                if ( !newLoc.equals(t.getLocation()) ) {
+                                    parallelTransition.getChildren().add(animateExistingTile(t,
+                                            newLoc));
+                                    gameGrid.put(newLoc, t);
+                                    gameGrid.replace(t.getLocation(), null);
+                                    t.setLocation(newLoc);
+                                    return 1;
+                                }
                             }
-                        }
-                        if ( !newLoc.equals(t.getLocation()) ) {
-                            parallelTransition.getChildren().add(animateExistingTile(t, newLoc));
-                            gameGrid.put(newLoc, t);
-                            gameGrid.replace(t.getLocation(), null);
-                            t.setLocation(newLoc);
-                            return 1;
-                        }
-                    }
-                    return 0;
-                });
+                            return 0;
+                        });
             } // TO-DO: Step 45: Use optionalTile to traverse the grid, using an atomicInteger to
             // return the results
             else if ( Game2048.STEP >= 45 ) {
-                tilesWereMoved = GridOperator.traverseGrid((i, j) -> {
-                    AtomicInteger result = new AtomicInteger();
-                    optionalTile(new Location(i, j)).ifPresent(t1 -> {
-                        final Location newLoc = findFarthestLocation(t1.getLocation(), direction);
-                        Location nextLocation = newLoc.offset(direction); // calculates to a possible merge
-                        optionalTile(nextLocation).filter(t2 -> t1.isMergeable(t2) && !t2.isMerged()).ifPresent(t2 -> {
-                            t2.merge(t1);
-                            t2.toFront();
-                            gameGrid.put(nextLocation, t2);
-                            gameGrid.replace(t1.getLocation(), null);
-                            board.addPoints(t2.getValue());
-                            if ( t2.getValue() == 2048 ) {
-                                board.setGameWin(true);
-                            }
-                            parallelTransition.getChildren().add(animateExistingTile(t1, nextLocation));
-                            parallelTransition.getChildren().add(animateMergedTile(t2));
-                            mergedToBeRemoved.add(t1);
+                tilesWereMoved = GridOperator.traverseGrid((i, j) ->
+                        {
+                            AtomicInteger result = new AtomicInteger();
+                            optionalTile(new Location(i, j)).ifPresent(t1 ->
+                                    {
+                                        final Location newLoc = findFarthestLocation(t1.
+                                                getLocation(), direction);
+                                        Location nextLocation = newLoc.offset(direction); // calculates to a possible merge
+                                        optionalTile(nextLocation).filter(t2 ->
+                                                t1.isMergeable(t2) && !t2.isMerged()).ifPresent(
+                                                t2 ->
+                                                {
+                                                    t2.merge(t1);
+                                                    t2.toFront();
+                                                    gameGrid.put(nextLocation, t2);
+                                                    gameGrid.replace(t1.getLocation(), null);
+                                                    board.addPoints(t2.getValue());
+                                                    if ( t2.getValue() == 2048 ) {
+                                                        board.setGameWin(true);
+                                                    }
+                                                    parallelTransition.getChildren().add(
+                                                            animateExistingTile(t1, nextLocation));
+                                                    parallelTransition.getChildren().add(
+                                                            animateMergedTile(t2));
+                                                    mergedToBeRemoved.add(t1);
 
-                            result.set(1);
+                                                    result.set(1);
+                                                });
+
+                                        if ( result.get() == 0 && !newLoc.equals(t1.getLocation()) ) {
+                                            parallelTransition.getChildren().add(
+                                                    animateExistingTile(t1, newLoc));
+                                            gameGrid.put(newLoc, t1);
+                                            gameGrid.replace(t1.getLocation(), null);
+                                            t1.setLocation(newLoc);
+                                            result.set(1);
+                                        }
+                                    });
+                            return result.get();
                         });
-
-                        if ( result.get() == 0 && !newLoc.equals(t1.getLocation()) ) {
-                            parallelTransition.getChildren().add(animateExistingTile(t1, newLoc));
-                            gameGrid.put(newLoc, t1);
-                            gameGrid.replace(t1.getLocation(), null);
-                            t1.setLocation(newLoc);
-                            result.set(1);
-                        }
-                    });
-                    return result.get();
-                });
             }
         }
 
@@ -379,45 +411,47 @@ public class GameManager extends Group implements IProblemRunner {
 
         // TO-DO: Step 20. Get a randomLocation, check not null, create random tile, add to board and to map
         if ( Game2048.STEP >= 20 ) {
-            parallelTransition.setOnFinished(e -> {
-                synchronized ( gameGrid ) {
-                    movingTiles = false;
-                }
-                // TO-DO: Step 30. Remove the tiles in the set from the gridGroup and clear the set.
-                // For all the tiles on the board: set to false their merged value
-                if ( Game2048.STEP >= 30 ) {
-                    board.getGridGroup().getChildren().removeAll(mergedToBeRemoved);
-                    mergedToBeRemoved.clear();
-                    gameGrid.values().stream().filter(Objects::nonNull).forEach(t -> t.setMerged(false));
-                }
+            parallelTransition.setOnFinished(e ->
+                    {
+                        synchronized ( gameGrid ) {
+                            movingTiles = false;
+                        }
+                        // TO-DO: Step 30. Remove the tiles in the set from the gridGroup and clear the set.
+                        // For all the tiles on the board: set to false their merged value
+                        if ( Game2048.STEP >= 30 ) {
+                            board.getGridGroup().getChildren().removeAll(mergedToBeRemoved);
+                            mergedToBeRemoved.clear();
+                            gameGrid.values().stream().filter(Objects::nonNull).forEach(t ->
+                                    t.setMerged(false));
+                        }
 
-                // TO-DO: Step 23. Start animation and block movingTiles till it has finished
-                if ( Game2048.STEP >= 23 ) {
-                    Location randomAvailableLocation = findRandomAvailableLocation();
-                    if ( randomAvailableLocation != null ) {
-                        if ( Game2048.STEP < 25 ) {
-                            addAndAnimateRandomTile(randomAvailableLocation);
-                        } // TO-DO: Step 25. Check if tiles moved to allow new tile
-                        else if ( Game2048.STEP >= 25 ) {
-                            if ( tilesWereMoved > 0 ) {
-                                addAndAnimateRandomTile(randomAvailableLocation);
+                        // TO-DO: Step 23. Start animation and block movingTiles till it has finished
+                        if ( Game2048.STEP >= 23 ) {
+                            Location randomAvailableLocation = findRandomAvailableLocation();
+                            if ( randomAvailableLocation != null ) {
+                                if ( Game2048.STEP < 25 ) {
+                                    addAndAnimateRandomTile(randomAvailableLocation);
+                                } // TO-DO: Step 25. Check if tiles moved to allow new tile
+                                else if ( Game2048.STEP >= 25 ) {
+                                    if ( tilesWereMoved > 0 ) {
+                                        addAndAnimateRandomTile(randomAvailableLocation);
+                                    }
+                                }
+                            } else if ( Game2048.STEP < 37 ) {
+                                System.out.println("Game Over");
+                            } // TO-DO: Step 37. Game over only if no pair of mergeable tiles available
+                            else if ( Game2048.STEP >= 37 ) {
+                                if ( mergeMovementsAvailable() == 0 ) {
+                                    System.out.println("Game Over");
+                                    // TO-DO: Step 41. set game over
+                                    if ( Game2048.STEP >= 41 ) {
+                                        board.setGameOver(true);
+                                    }
+                                }
                             }
                         }
-                    } else if ( Game2048.STEP < 37 ) {
-                        System.out.println("Game Over");
-                    } // TO-DO: Step 37. Game over only if no pair of mergeable tiles available
-                    else if ( Game2048.STEP >= 37 ) {
-                        if ( mergeMovementsAvailable() == 0 ) {
-                            System.out.println("Game Over");
-                            // TO-DO: Step 41. set game over
-                            if ( Game2048.STEP >= 41 ) {
-                                board.setGameOver(true);
-                            }
-                        }
-                    }
-                }
 
-            });
+                    });
             synchronized ( gameGrid ) {
                 movingTiles = true;
             }
@@ -447,37 +481,40 @@ public class GameManager extends Group implements IProblemRunner {
             scaleTransition.setInterpolator(Interpolator.EASE_OUT);
             // TO-DO: Step 37. After last movement on full grid, check if there are movements available
             if ( Game2048.STEP >= 37 ) {
-                scaleTransition.setOnFinished(e -> {
-                    if ( gameGrid.values().parallelStream().noneMatch(Objects::isNull) && mergeMovementsAvailable() == 0 ) {
-                        System.out.println("Game Over");
-                        // TO-DO: Step 41. set game over
-                        if ( Game2048.STEP >= 41 ) {
-                            board.setGameOver(true);
-                        }
-                    }
-                });
+                scaleTransition.setOnFinished(e ->
+                        {
+                            if ( gameGrid.values().parallelStream().noneMatch(Objects::isNull) && mergeMovementsAvailable() == 0 ) {
+                                System.out.println("Game Over");
+                                // TO-DO: Step 41. set game over
+                                if ( Game2048.STEP >= 41 ) {
+                                    board.setGameOver(true);
+                                }
+                            }
+                        });
             }
             scaleTransition.play();
         }
     }
 
     /**
-     * Animation that moves the tile from its previous location to a new
-     * location
+     * Animation that moves the tile from its previous location to a new location
      *
      * @param tile        to be animated
      * @param newLocation new location of the tile
      *
      * @return a timeline
      */
-    private Timeline animateExistingTile(Tile tile, Location newLocation) {
+    private Timeline animateExistingTile(Tile tile,
+            Location newLocation) {
         Timeline timeline = new Timeline();
         // TO-DO: Step 19. Animate tiles movement from actual location to new location in 65ms
         if ( Game2048.STEP >= 19 ) {
             KeyValue kvX = new KeyValue(tile.layoutXProperty(),
-                    newLocation.getLayoutX(Board.CELL_SIZE) - (tile.getMinHeight() / 2), Interpolator.EASE_OUT);
+                    newLocation.getLayoutX(Board.CELL_SIZE) - (tile.getMinHeight() / 2),
+                    Interpolator.EASE_OUT);
             KeyValue kvY = new KeyValue(tile.layoutYProperty(),
-                    newLocation.getLayoutY(Board.CELL_SIZE) - (tile.getMinHeight() / 2), Interpolator.EASE_OUT);
+                    newLocation.getLayoutY(Board.CELL_SIZE) - (tile.getMinHeight() / 2),
+                    Interpolator.EASE_OUT);
 
             KeyFrame kfX = new KeyFrame(Duration.millis(65), kvX);
             KeyFrame kfY = new KeyFrame(Duration.millis(65), kvY);
@@ -489,8 +526,8 @@ public class GameManager extends Group implements IProblemRunner {
     }
 
     /**
-     * Animation that creates a pop effect when two tiles merge by increasing
-     * the tile scale to 120% at the middle, and then going back to 100%
+     * Animation that creates a pop effect when two tiles merge by increasing the tile scale to 120%
+     * at the middle, and then going back to 100%
      *
      * @param tile to be animated
      *
@@ -515,7 +552,8 @@ public class GameManager extends Group implements IProblemRunner {
         return new SequentialTransition();
     }
 
-    private boolean compare(SimpleTile[] line1, SimpleTile[] line2) {
+    private boolean compare(SimpleTile[] line1,
+            SimpleTile[] line2) {
         if ( line1 == line2 ) {
             return true;
         } else if ( line1.length != line2.length ) {
@@ -539,7 +577,8 @@ public class GameManager extends Group implements IProblemRunner {
      *
      * @return a location
      */
-    private Location findFarthestLocation(Location location, Direction direction) {
+    private Location findFarthestLocation(Location location,
+            Direction direction) {
         Location farthest = location;
         // TO-DO: Step 17. Search for the farthest location in the direction of movement
         // with no tile and inside the grid
@@ -555,14 +594,14 @@ public class GameManager extends Group implements IProblemRunner {
     /**
      * Finds a random location or returns null if none exist
      *
-     * @return a random location or <code>null</code> if there are no more
-     *         locations available
+     * @return a random location or <code>null</code> if there are no more locations available
      */
     private Location findRandomAvailableLocation() {
         Location location = null;
         // TO-DO: Step 21. From empty tiles remaining, get a random position
         if ( Game2048.STEP >= 21 ) {
-            List<Location> availableLocations = locations.stream().filter(l -> gameGrid.get(l) == null)
+            List<Location> availableLocations = locations.stream().filter(l ->
+                    gameGrid.get(l) == null)
                     .collect(Collectors.toList());
 
             if ( availableLocations.isEmpty() ) {
@@ -575,7 +614,8 @@ public class GameManager extends Group implements IProblemRunner {
         return location;
     }
 
-    private SimpleTile[] getLine(int index, NTupleBoard board) {
+    private SimpleTile[] getLine(int index,
+            NTupleBoard board) {
         SimpleTile[] result = new SimpleTile[4];
         for ( int i = 0; i < 4; i++ ) {
             result[i] = board.tileAt(i, index);
@@ -601,17 +641,19 @@ public class GameManager extends Group implements IProblemRunner {
                 }
             } // TO-DO: Step 25. Use traverseGrid
             else if ( Game2048.STEP >= 25 ) {
-                GridOperator.traverseGrid((i, j) -> {
-                    Location location = new Location(i, j);
-                    locations.add(location);
-                    gameGrid.put(location, null);
-                    return 0;
-                });
+                GridOperator.traverseGrid((i, j) ->
+                        {
+                            Location location = new Location(i, j);
+                            locations.add(location);
+                            gameGrid.put(location, null);
+                            return 0;
+                        });
             }
         }
     }
 
-    private SimpleTile[] mergeLine(SimpleTile[] oldLine, NTupleBoard afterstate) {
+    private SimpleTile[] mergeLine(SimpleTile[] oldLine,
+            NTupleBoard afterstate) {
         LinkedList<SimpleTile> list = new LinkedList<>();
         for ( int i = 0; i < 4 && !oldLine[i].isEmpty(); i++ ) {
             SimpleTile tile = oldLine[i];
@@ -636,10 +678,9 @@ public class GameManager extends Group implements IProblemRunner {
     /**
      * Finds the number of pairs of tiles that can be merged
      * <p>
-     * This method is called only when the grid is full of tiles, what makes the
-     * use of Optional unnecessary, but it could be used when the board is not
-     * full to find the number of pairs of mergeable tiles and provide a hint
-     * for the user, for instance
+     * This method is called only when the grid is full of tiles, what makes the use of Optional
+     * unnecessary, but it could be used when the board is not full to find the number of pairs of
+     * mergeable tiles and provide a hint for the user, for instance
      *
      * @return the number of pairs of tiles that can be merged
      */
@@ -647,30 +688,37 @@ public class GameManager extends Group implements IProblemRunner {
         final AtomicInteger numMergeableTile = new AtomicInteger();
         // TO-DO: Step 36. Traverse grid in two directions, looking for pairs of mergeable tiles
         if ( Game2048.STEP >= 36 ) {
-            Stream.of(Direction.UP, Direction.LEFT).parallel().forEach(direction -> {
-                GridOperator.traverseGrid((x, y) -> {
-                    Location thisloc = new Location(x, y);
-                    if ( Game2048.STEP < 43 ) {
-                        Tile t1 = gameGrid.get(thisloc);
-                        if ( t1 != null ) {
-                            Location nextLoc = thisloc.offset(direction);
-                            if ( nextLoc.isValidFor() ) {
-                                Tile t2 = gameGrid.get(nextLoc);
-                                if ( t2 != null && t1.isMergeable(t2) ) {
-                                    numMergeableTile.incrementAndGet();
-                                }
-                            }
-                        }
-                    } // TO-DO: Step 44. Use optionalTile to find pairs of mergeable tiles
-                    else if ( Game2048.STEP >= 44 ) {
-                        optionalTile(thisloc).ifPresent(t1 -> {
-                            optionalTile(thisloc.offset(direction)).filter(t2 -> t1.isMergeable(t2))
-                                    .ifPresent(t2 -> numMergeableTile.incrementAndGet());
-                        });
-                    }
-                    return 0;
-                });
-            });
+            Stream.of(Direction.UP, Direction.LEFT).parallel().forEach(direction ->
+                    {
+                        GridOperator.traverseGrid((x, y) ->
+                                {
+                                    Location thisloc = new Location(x, y);
+                                    if ( Game2048.STEP < 43 ) {
+                                        Tile t1 = gameGrid.get(thisloc);
+                                        if ( t1 != null ) {
+                                            Location nextLoc = thisloc.offset(direction);
+                                            if ( nextLoc.isValidFor() ) {
+                                                Tile t2 = gameGrid.get(nextLoc);
+                                                if ( t2 != null && t1.isMergeable(t2) ) {
+                                                    numMergeableTile.incrementAndGet();
+                                                }
+                                            }
+                                        }
+                                    } // TO-DO: Step 44. Use optionalTile to find pairs of mergeable tiles
+                                    else if ( Game2048.STEP >= 44 ) {
+                                        optionalTile(thisloc).ifPresent(t1 ->
+                                                {
+                                                    optionalTile(thisloc.offset(direction)).filter(
+                                                            t2 ->
+                                                            t1.isMergeable(t2))
+                                                            .ifPresent(t2 ->
+                                                                    numMergeableTile.
+                                                                    incrementAndGet());
+                                                });
+                                    }
+                                    return 0;
+                                });
+                    });
         }
 
         return numMergeableTile.get();
@@ -698,8 +746,7 @@ public class GameManager extends Group implements IProblemRunner {
     }
 
     /**
-     * optionalTile allows using tiles from the map at some location, whether
-     * they are null or not
+     * optionalTile allows using tiles from the map at some location, whether they are null or not
      *
      * @param loc location of the tile
      *
@@ -723,7 +770,8 @@ public class GameManager extends Group implements IProblemRunner {
         }
     }
 
-    private void rotate(int angle, NTupleBoard original) {
+    private void rotate(int angle,
+            NTupleBoard original) {
         SimpleTile[] rotatedTiles = new SimpleTile[TILE_NUMBER];
 
         int offsetX = 3, offsetY = 3;
@@ -746,7 +794,9 @@ public class GameManager extends Group implements IProblemRunner {
         arraycopy(rotatedTiles, 0, original.getTiles(), 0, TILE_NUMBER);
     }
 
-    private void setLine(int index, SimpleTile[] re, NTupleBoard board) {
+    private void setLine(int index,
+            SimpleTile[] re,
+            NTupleBoard board) {
         arraycopy(re, 0, board.getTiles(), index * 4, 4);
     }
 
