@@ -75,7 +75,7 @@ public class GameManager extends Group implements IProblemRunner {
             board = new Board();
             getChildren().add(board);
         }
-        // TO-DO: Step 42. Add listener to reset game
+        // TO-DO: Step 42. Add listener to randomize game
         if ( Game2048.STEP >= 42 ) {
             board.resetGameProperty().addListener((ov, b, b1) ->
                     {
@@ -302,7 +302,7 @@ public class GameManager extends Group implements IProblemRunner {
             if ( Game2048.STEP >= 26 ) {
                 GridOperator.sortGrid(direction);
             }
-            // TO-DO: Step 33. reset points
+            // TO-DO: Step 33. randomize points
             if ( Game2048.STEP >= 33 ) {
                 board.setPoints(0);
             }
