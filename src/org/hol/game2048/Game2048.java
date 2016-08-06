@@ -33,26 +33,6 @@ public class Game2048 extends Application {
     public static final int STEP = 45;
 
     /**
-     *
-     */
-    public static double activationFunctionMax;
-
-    /**
-     *
-     */
-    public static double activationFunctionMin;
-
-    /**
-     *
-     */
-    public static int maxReward;
-
-    /**
-     *
-     */
-    public static int minReward;
-
-    /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -69,15 +49,12 @@ public class Game2048 extends Application {
         if ( STEP >= 10 ) {
             Font.loadFont(Game2048.class.getResource("ClearSans-Bold.ttf").toExternalForm(), 10.0);
             InputStream perceptronFile = this.getClass().getResourceAsStream(
-                    "/org/hol/game2048/trainedntuplas/Experiment_TanH_trained.ser");
-            Function<Double, Double> activationFunction = FunctionUtils.TANH;
-            Function<Double, Double> derivatedActivationFunction = FunctionUtils.TANH_DERIVATED;
+                    "/org/hol/game2048/trainedntuplas/Best.ser");
+            Function<Double, Double> activationFunction = FunctionUtils.LINEAR;
+            Function<Double, Double> derivatedActivationFunction = FunctionUtils.LINEAR_DERIVATED;
             boolean concurrency = false;
             int maxTile = 15;
-            activationFunctionMax = 1;
-            activationFunctionMin = -1;
-            maxReward = 500_000;
-            minReward = -500_000;
+
             int[] nTuplesLenght = new int[17];
             for ( int i = 0; i < 17; i++ ) {
                 nTuplesLenght[i] = 4;
@@ -123,7 +100,7 @@ public class Game2048 extends Application {
                         if ( keyCode.isArrowKey() ) {
                             Direction dir = Direction.valueFor(keyCode);
                             gameManager.move(dir);
-                        } else if ( keyCode == KeyCode.SPACE ) {
+                        } else if ( keyCode == KeyCode.SPACE && gameManager.getNTupleBoard().isCanMove() ) {
                             List<IAction> possibleActions = gameManager.listAllPossibleActions(
                                     gameManager.getNTupleBoard());
                             Direction bestAction = (Direction) TDLambdaLearning.
