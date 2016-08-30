@@ -5,13 +5,13 @@
  */
 package org.hol.game2048;
 
-import ar.edu.unrc.coeus.tdlearning.training.ntuple.SamplePointState;
+import ar.edu.unrc.coeus.tdlearning.training.ntuple.SamplePointValue;
 
 /**
  *
  * @author franc
  */
-public class SimpleTile implements SamplePointState {
+public class SimpleTile implements SamplePointValue {
 
     private int value;
 

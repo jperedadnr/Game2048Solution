@@ -4,7 +4,7 @@ import ar.edu.unrc.coeus.tdlearning.interfaces.IAction;
 import ar.edu.unrc.coeus.tdlearning.learning.ELearningStyle;
 import ar.edu.unrc.coeus.tdlearning.learning.TDLambdaLearning;
 import ar.edu.unrc.coeus.tdlearning.training.ntuple.NTupleSystem;
-import ar.edu.unrc.coeus.tdlearning.training.ntuple.SamplePointState;
+import ar.edu.unrc.coeus.tdlearning.training.ntuple.SamplePointValue;
 import ar.edu.unrc.coeus.tdlearning.utils.FunctionUtils;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,12 +60,12 @@ public class Game2048 extends Application {
                 nTuplesLenght[i] = 4;
             }
 
-            ArrayList<SamplePointState> allSamplePointStates = new ArrayList<>();
-            allSamplePointStates.add(new SimpleTile());
+            ArrayList<SamplePointValue> allSamplePointPossibleValues = new ArrayList<>();
+            allSamplePointPossibleValues.add(new SimpleTile());
             for ( int i = 1; i <= maxTile; i++ ) {
-                allSamplePointStates.add(new SimpleTile((int) Math.pow(2, i)));
+                allSamplePointPossibleValues.add(new SimpleTile((int) Math.pow(2, i)));
             }
-            nTupleSystem = new NTupleSystem(allSamplePointStates, nTuplesLenght, activationFunction,
+            nTupleSystem = new NTupleSystem(allSamplePointPossibleValues, nTuplesLenght, activationFunction,
                     derivatedActivationFunction, concurrency);
             try {
                 nTupleSystem.load(perceptronFile);
