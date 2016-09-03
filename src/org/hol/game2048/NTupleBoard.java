@@ -57,6 +57,11 @@ public class NTupleBoard implements IStateNTuple {
         isFull = false;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if ( this == obj ) {
@@ -302,6 +307,10 @@ public class NTupleBoard implements IStateNTuple {
         this.tiles = tiles;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 3;

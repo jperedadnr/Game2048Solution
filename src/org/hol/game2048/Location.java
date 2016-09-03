@@ -21,6 +21,11 @@ public class Location {
         this.y = y;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if ( obj == null ) {
@@ -88,6 +93,10 @@ public class Location {
         this.y = y;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -118,6 +127,10 @@ public class Location {
         return new Location(x, y);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Location{" + "x=" + x + ", y=" + y + '}';

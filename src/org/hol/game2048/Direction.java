@@ -52,6 +52,10 @@ public enum Direction implements IAction {
         return y;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Direction{" + "y=" + y + ", x=" + x + "} " + name();
