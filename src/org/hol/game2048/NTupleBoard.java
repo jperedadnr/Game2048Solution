@@ -383,8 +383,8 @@ public class NTupleBoard implements IStateNTuple {
     }
 
     /**
-     * actualizamos la traduccion del tablero como entrada del perceptron, encriptado y normalizado.
-     * Tambien se actualiza el calculo de si este es un tablero fianl o no.
+     * actualizamos la traduccion del tablero como entrada del perceptron, encriptado y normalizado. Tambien se
+     * actualiza el calculo de si este es un tablero fianl o no.
      */
     public void updateInternalState() {
         availableSpaceList = calculateAvailableSpace();
