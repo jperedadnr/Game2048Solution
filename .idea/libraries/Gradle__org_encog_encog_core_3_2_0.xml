@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.encog:encog-core:3.2.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.encog/encog-core/3.2.0/a14e8e52bcb912e40805327b2e9c8e81a8436e41/encog-core-3.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.encog/encog-core/3.2.0/f76cf052afe0c220ce44ee8c08c42c7019d2b2eb/encog-core-3.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

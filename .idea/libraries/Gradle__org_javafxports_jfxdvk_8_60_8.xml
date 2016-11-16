@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.javafxports:jfxdvk:8.60.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.javafxports/jfxdvk/8.60.8/8d3b1b00af28d49f41b41faf466821053c44819e/jfxdvk-8.60.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.javafxports/jfxdvk/8.60.8/e68bb464cc8ae7ee287091041aeac39ae471abf/jfxdvk-8.60.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
