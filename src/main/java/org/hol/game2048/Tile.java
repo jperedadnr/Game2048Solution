@@ -102,10 +102,7 @@ class Tile
     public
     boolean isMergeable(Tile anotherTile) {
         // TO-DO: Step 27. Check it this.tile can be merged with anotherTile
-        if (Game2048.STEP >= 27) {
-            return anotherTile != null && getValue() == anotherTile.getValue();
-        }
-        return false;
+        return Game2048.STEP >= 27 && anotherTile != null && getValue() == anotherTile.getValue();
     }
 
     /**

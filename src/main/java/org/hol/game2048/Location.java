@@ -39,10 +39,7 @@ class Location {
             return false;
         }
         final Location other = (Location) obj;
-        if (this.x != other.x) {
-            return false;
-        }
-        return this.y == other.y;
+        return this.x == other.x && this.y == other.y;
     }
 
     /**

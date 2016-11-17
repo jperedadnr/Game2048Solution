@@ -14,7 +14,7 @@ public
 class SimpleTile
         implements SamplePointValue {
 
-    private int value;
+    private final int value;
 
     /**
      *

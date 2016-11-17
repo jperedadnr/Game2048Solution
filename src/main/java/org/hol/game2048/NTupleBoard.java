@@ -124,10 +124,7 @@ class NTupleBoard
         if (this.needToAddTile != other.needToAddTile) {
             return false;
         }
-        if (!Arrays.deepEquals(this.tiles, other.tiles)) {
-            return false;
-        }
-        return Objects.equals(this.availableSpaceList, other.availableSpaceList);
+        return Arrays.deepEquals(this.tiles, other.tiles) && Objects.equals(this.availableSpaceList, other.availableSpaceList);
     }
 
     @Override
@@ -139,9 +136,7 @@ class NTupleBoard
         copy.setCanMove(isCanMove());
         copy.isFull = isFull;
         copy.availableSpaceList = new ArrayList<>(TILE_NUMBER);
-        availableSpaceList.stream().forEach((space) -> {
-            copy.availableSpaceList.add(space);
-        });
+        availableSpaceList.forEach((space) -> copy.availableSpaceList.add(space));
         copy.needToAddTile = needToAddTile;
         copy.setPartialScore(getPartialScore());
         return copy;
@@ -153,77 +148,60 @@ class NTupleBoard
         switch (nTupleIndex) {
             // verticales
             case 0: {
-                SamplePointValue[] sample = {tileAt(0, 0), tileAt(0, 1), tileAt(0, 2), tileAt(0, 3)};
-                return sample;
+                return new SamplePointValue[]{tileAt(0, 0), tileAt(0, 1), tileAt(0, 2), tileAt(0, 3)};
             }
             case 1: {
-                SamplePointValue[] sample = {tileAt(1, 0), tileAt(1, 1), tileAt(1, 2), tileAt(1, 3)};
-                return sample;
+                return new SamplePointValue[]{tileAt(1, 0), tileAt(1, 1), tileAt(1, 2), tileAt(1, 3)};
             }
             case 2: {
-                SamplePointValue[] sample = {tileAt(2, 0), tileAt(2, 1), tileAt(2, 2), tileAt(2, 3)};
-                return sample;
+                return new SamplePointValue[]{tileAt(2, 0), tileAt(2, 1), tileAt(2, 2), tileAt(2, 3)};
             }
             case 3: {
-                SamplePointValue[] sample = {tileAt(3, 0), tileAt(3, 1), tileAt(3, 2), tileAt(3, 3)};
-                return sample;
+                return new SamplePointValue[]{tileAt(3, 0), tileAt(3, 1), tileAt(3, 2), tileAt(3, 3)};
             }
             // horizontales
             case 4: {
-                SamplePointValue[] sample = {tileAt(0, 0), tileAt(1, 0), tileAt(2, 0), tileAt(3, 0)};
-                return sample;
+                return new SamplePointValue[]{tileAt(0, 0), tileAt(1, 0), tileAt(2, 0), tileAt(3, 0)};
             }
             case 5: {
-                SamplePointValue[] sample = {tileAt(0, 1), tileAt(1, 1), tileAt(2, 1), tileAt(3, 1)};
-                return sample;
+                return new SamplePointValue[]{tileAt(0, 1), tileAt(1, 1), tileAt(2, 1), tileAt(3, 1)};
             }
             case 6: {
-                SamplePointValue[] sample = {tileAt(0, 2), tileAt(1, 2), tileAt(2, 2), tileAt(3, 2)};
-                return sample;
+                return new SamplePointValue[]{tileAt(0, 2), tileAt(1, 2), tileAt(2, 2), tileAt(3, 2)};
             }
             case 7: {
-                SamplePointValue[] sample = {tileAt(0, 3), tileAt(1, 3), tileAt(2, 3), tileAt(3, 3)};
-                return sample;
+                return new SamplePointValue[]{tileAt(0, 3), tileAt(1, 3), tileAt(2, 3), tileAt(3, 3)};
             }
             // cuadrados
             // primera fila de rectangulos
             case 8: {
-                SamplePointValue[] sample = {tileAt(0, 0), tileAt(0, 1), tileAt(1, 1), tileAt(1, 0)};
-                return sample;
+                return new SamplePointValue[]{tileAt(0, 0), tileAt(0, 1), tileAt(1, 1), tileAt(1, 0)};
             }
             case 9: {
-                SamplePointValue[] sample = {tileAt(1, 0), tileAt(1, 1), tileAt(2, 1), tileAt(2, 0)};
-                return sample;
+                return new SamplePointValue[]{tileAt(1, 0), tileAt(1, 1), tileAt(2, 1), tileAt(2, 0)};
             }
             case 10: {
-                SamplePointValue[] sample = {tileAt(2, 0), tileAt(2, 1), tileAt(3, 1), tileAt(3, 0)};
-                return sample;
+                return new SamplePointValue[]{tileAt(2, 0), tileAt(2, 1), tileAt(3, 1), tileAt(3, 0)};
             }
             //segunda fila de rectangulos
             case 11: {
-                SamplePointValue[] sample = {tileAt(0, 1), tileAt(0, 2), tileAt(1, 2), tileAt(1, 1)};
-                return sample;
+                return new SamplePointValue[]{tileAt(0, 1), tileAt(0, 2), tileAt(1, 2), tileAt(1, 1)};
             }
             case 12: {
-                SamplePointValue[] sample = {tileAt(1, 1), tileAt(1, 2), tileAt(2, 2), tileAt(2, 1)};
-                return sample;
+                return new SamplePointValue[]{tileAt(1, 1), tileAt(1, 2), tileAt(2, 2), tileAt(2, 1)};
             }
             case 13: {
-                SamplePointValue[] sample = {tileAt(2, 1), tileAt(2, 2), tileAt(3, 2), tileAt(3, 1)};
-                return sample;
+                return new SamplePointValue[]{tileAt(2, 1), tileAt(2, 2), tileAt(3, 2), tileAt(3, 1)};
             }
             //tercera fila de rectangulos
             case 14: {
-                SamplePointValue[] sample = {tileAt(0, 2), tileAt(0, 3), tileAt(1, 3), tileAt(1, 2)};
-                return sample;
+                return new SamplePointValue[]{tileAt(0, 2), tileAt(0, 3), tileAt(1, 3), tileAt(1, 2)};
             }
             case 15: {
-                SamplePointValue[] sample = {tileAt(1, 2), tileAt(1, 3), tileAt(2, 3), tileAt(2, 2)};
-                return sample;
+                return new SamplePointValue[]{tileAt(1, 2), tileAt(1, 3), tileAt(2, 3), tileAt(2, 2)};
             }
             case 16: {
-                SamplePointValue[] sample = {tileAt(2, 2), tileAt(2, 3), tileAt(3, 3), tileAt(3, 2)};
-                return sample;
+                return new SamplePointValue[]{tileAt(2, 2), tileAt(2, 3), tileAt(3, 3), tileAt(3, 2)};
             }
 
             default: {

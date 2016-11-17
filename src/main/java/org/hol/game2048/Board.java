@@ -120,7 +120,7 @@ class Board
             int i,
             int j
     ) {
-        Rectangle cell = null;
+        Rectangle cell;
         // TO-DO: Step 4. Create a squared rectangle, located over each coordinate (x,y), size CELL_SIZE
         if (Game2048.STEP >= 4) {
             cell = new Rectangle(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);

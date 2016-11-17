@@ -26,10 +26,8 @@ class GridOperator {
         // TO-DO: Step 26. Sort TraversalX, traversalY, so for Right or Down directions
         // they are taken in reverse order
         if (Game2048.STEP >= 26) {
-            Collections.sort(traversalX, direction.equals(Direction.RIGHT) ? Collections.
-                                                                                                reverseOrder() : Integer::compareTo);
-            Collections.sort(traversalY, direction.equals(Direction.DOWN) ? Collections.
-                                                                                               reverseOrder() : Integer::compareTo);
+            traversalX.sort(direction.equals(Direction.RIGHT) ? Collections.reverseOrder() : Integer::compareTo);
+            traversalY.sort(direction.equals(Direction.DOWN) ? Collections.reverseOrder() : Integer::compareTo);
         }
     }
 
@@ -44,11 +42,7 @@ class GridOperator {
         // TO-DO: Step 24. Traverse grid, applyinf the functional to every cell, returning the
         // accumulated result
         if (Game2048.STEP >= 24) {
-            traversalX.forEach(x -> {
-                traversalY.forEach(y -> {
-                    at.addAndGet(func.applyAsInt(x, y));
-                });
-            });
+            traversalX.forEach(x -> traversalY.forEach(y -> at.addAndGet(func.applyAsInt(x, y))));
         }
         return at.get();
     }

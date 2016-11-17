@@ -263,8 +263,7 @@ class GameManager
     @Override
     public
     Object[] evaluateBoardWithPerceptron(IState state) {
-        Object[] out = {nTupleSystem.getComputation((NTupleBoard) state)};
-        return out;
+        return new Object[]{nTupleSystem.getComputation((NTupleBoard) state)};
     }
 
     /**
@@ -275,6 +274,7 @@ class GameManager
      *
      * @return a location
      */
+    @SuppressWarnings("UnusedAssignment")
     private
     Location findFarthestLocation(
             Location location,
@@ -482,7 +482,7 @@ class GameManager
                     }
                 } // TO-DO: Step 44. Use optionalTile to find pairs of mergeable tiles
                 else if (Game2048.STEP >= 44) {
-                    optionalTile(thisLoc).ifPresent(t1 -> optionalTile(thisLoc.offset(direction)).filter(t2 -> t1.isMergeable(t2))
+                    optionalTile(thisLoc).ifPresent(t1 -> optionalTile(thisLoc.offset(direction)).filter(t1::isMergeable)
                                                                                                  .ifPresent(t2 -> numMergeableTile.incrementAndGet()));
                 }
                 return 0;
@@ -522,7 +522,7 @@ class GameManager
             tiles.forEach(t -> {
                 Tile           newTile = Tile.newTile(t.getValue());
                 final Location newLoc  = t.getLocation().offset(direction);
-                if (newLoc.isValidFor() && !tiles.stream().filter(t2 -> t2.getLocation().equals(newLoc)).findAny().isPresent()) {
+                if (newLoc.isValidFor() && tiles.stream().noneMatch(t2 -> t2.getLocation().equals(newLoc))) {
                     newTile.setLocation(newLoc);
                 } else {
                     newTile.setLocation(t.getLocation());
@@ -534,25 +534,23 @@ class GameManager
         // moving the existing tiles to the farthest location, and updating the map.
         // Note: the IntStreams are not well ordered for the moment
         if (Game2048.STEP >= 18 && Game2048.STEP < 25) {
-            IntStream.range(0, 4).boxed().forEach(i -> {
-                IntStream.range(0, 4).boxed().forEach(j -> {
-                    Tile t = gameGrid.get(new Location(i, j));
-                    if (t != null) {
-                        final Location newLoc = findFarthestLocation(t.getLocation(), direction);
-                        if (!newLoc.equals(t.getLocation())) {
-                            if (Game2048.STEP < 20) {
-                                board.moveTile(t, newLoc);
-                            } // TO-DO: Step 20. Animate tiles movement
-                            else if (Game2048.STEP >= 20) {
-                                parallelTransition.getChildren().add(animateExistingTile(t, newLoc));
-                            }
-                            gameGrid.put(newLoc, t);
-                            gameGrid.replace(t.getLocation(), null);
-                            t.setLocation(newLoc);
+            IntStream.range(0, 4).boxed().forEach(i -> IntStream.range(0, 4).boxed().forEach(j -> {
+                Tile t = gameGrid.get(new Location(i, j));
+                if (t != null) {
+                    final Location newLoc = findFarthestLocation(t.getLocation(), direction);
+                    if (!newLoc.equals(t.getLocation())) {
+                        if (Game2048.STEP < 20) {
+                            board.moveTile(t, newLoc);
+                        } // TO-DO: Step 20. Animate tiles movement
+                        else if (Game2048.STEP >= 20) {
+                            parallelTransition.getChildren().add(animateExistingTile(t, newLoc));
                         }
+                        gameGrid.put(newLoc, t);
+                        gameGrid.replace(t.getLocation(), null);
+                        t.setLocation(newLoc);
                     }
-                });
-            });
+                }
+            }));
         }
         // TO-DO: Step 25. Replace the IntStreams with the traverseGrid method
         if (Game2048.STEP >= 25) {
