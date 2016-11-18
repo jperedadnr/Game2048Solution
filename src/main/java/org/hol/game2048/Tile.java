@@ -102,7 +102,7 @@ class Tile
     public
     boolean isMergeable(Tile anotherTile) {
         // TO-DO: Step 27. Check it this.tile can be merged with anotherTile
-        return Game2048.STEP >= 27 && anotherTile != null && getValue() == anotherTile.getValue();
+        return Game2048.STEP >= 27 && anotherTile != null && value == anotherTile.value;
     }
 
     /**
@@ -130,7 +130,7 @@ class Tile
         // set the text with the new value and replace the old style ‘game-title-“-value with the new one
         if (Game2048.STEP >= 27) {
             getStyleClass().remove("game-tile-" + value);
-            this.value += another.getValue();
+            this.value += another.value;
             setText(Integer.toString(value));
             merged = true;
             getStyleClass().add("game-tile-" + value);

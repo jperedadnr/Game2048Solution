@@ -131,14 +131,14 @@ class NTupleBoard
     public
     IState getCopy() {
         NTupleBoard copy = new NTupleBoard(new SimpleTile[TILE_NUMBER]);
-        arraycopy(getTiles(), 0, copy.getTiles(), 0, NTupleBoard.TILE_NUMBER);
-        copy.setiWin(isiWin());
-        copy.setCanMove(isCanMove());
+        arraycopy(tiles, 0, copy.tiles, 0, NTupleBoard.TILE_NUMBER);
+        copy.iWin = iWin;
+        copy.canMove = canMove;
         copy.isFull = isFull;
         copy.availableSpaceList = new ArrayList<>(TILE_NUMBER);
         availableSpaceList.forEach((space) -> copy.availableSpaceList.add(space));
         copy.needToAddTile = needToAddTile;
-        copy.setPartialScore(getPartialScore());
+        copy.partialScore = partialScore;
         return copy;
     }
 
@@ -229,7 +229,7 @@ class NTupleBoard
     @Override
     public
     double getStateReward(int outputNeuron) {
-        return getPartialScore();
+        return partialScore;
     }
 
     /**
@@ -290,7 +290,7 @@ class NTupleBoard
     public
     boolean isEqual(NTupleBoard gameBoard) {
         for (int i = 0; i < tiles.length; i++) {
-            if (!this.getTiles()[i].equals(gameBoard.getTiles()[i])) {
+            if (!tiles[i].equals(gameBoard.tiles[i])) {
                 return false;
             }
         }
@@ -300,7 +300,7 @@ class NTupleBoard
     @Override
     public
     boolean isTerminalState() {
-        return isiWin() || !isCanMove();
+        return iWin || !canMove;
     }
 
     /**

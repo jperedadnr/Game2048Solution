@@ -295,7 +295,7 @@ class GameManager
     /**
      * Finds a random location or returns null if none exist
      *
-     * @return a random location or <code>null</code> if there are no more locations available
+     * @return a random location or {@code null} if there are no more locations available
      */
     private
     Location findRandomAvailableLocation() {
@@ -725,7 +725,7 @@ class GameManager
      *
      * @param loc location of the tile
      *
-     * @return an Optional<Tile> containing null or a valid tile
+     * @return an Optional\<Tile\> containing null or a valid tile
      */
     private
     Optional<Tile> optionalTile(Location loc) {
@@ -737,7 +737,7 @@ class GameManager
     }
 
     /**
-     * Redraws all tiles in the <code>gameGrid</code> object
+     * Redraws all tiles in the {@code gameGrid} object
      */
     private
     void redrawTilesInGameGrid() {
