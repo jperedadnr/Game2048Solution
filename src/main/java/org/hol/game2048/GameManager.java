@@ -66,7 +66,7 @@ class GameManager
             });
         }
 
-        // TO-DO: Step 15. call initilize gameGrid
+        // TO-DO: Step 15. call initialize gameGrid
         if (Game2048.STEP >= 15) {
             initializeGameGrid();
         }
@@ -239,7 +239,7 @@ class GameManager
                 break;
             }
             default: {
-                throw new IllegalArgumentException("la accion \"" + action.toString() + "\" no es valida");
+                throw new IllegalArgumentException("la acción \"" + action.toString() + "\" no es valida");
             }
         }
         return futureBoard;
@@ -267,7 +267,7 @@ class GameManager
     }
 
     /**
-     * Searchs for the farthest empty location where the current tile could go
+     * Search for the farthest empty location where the current tile could go
      *
      * @param location  of the tile
      * @param direction of movement

@@ -173,7 +173,7 @@ class NTupleBoard
                 return new SamplePointValue[]{tileAt(0, 3), tileAt(1, 3), tileAt(2, 3), tileAt(3, 3)};
             }
             // cuadrados
-            // primera fila de rectangulos
+            // primera fila de rectángulos
             case 8: {
                 return new SamplePointValue[]{tileAt(0, 0), tileAt(0, 1), tileAt(1, 1), tileAt(1, 0)};
             }
@@ -183,7 +183,7 @@ class NTupleBoard
             case 10: {
                 return new SamplePointValue[]{tileAt(2, 0), tileAt(2, 1), tileAt(3, 1), tileAt(3, 0)};
             }
-            //segunda fila de rectangulos
+            //segunda fila de rectángulos
             case 11: {
                 return new SamplePointValue[]{tileAt(0, 1), tileAt(0, 2), tileAt(1, 2), tileAt(1, 1)};
             }
@@ -193,7 +193,7 @@ class NTupleBoard
             case 13: {
                 return new SamplePointValue[]{tileAt(2, 1), tileAt(2, 2), tileAt(3, 2), tileAt(3, 1)};
             }
-            //tercera fila de rectangulos
+            //tercera fila de rectángulos
             case 14: {
                 return new SamplePointValue[]{tileAt(0, 2), tileAt(0, 3), tileAt(1, 3), tileAt(1, 2)};
             }
@@ -285,7 +285,7 @@ class NTupleBoard
      * @param gameBoard para comparar
      *                  <p>
      *
-     * @return true si los 2 tableros son iguales topologicamente
+     * @return true si los 2 tableros son iguales topológicamente
      */
     public
     boolean isEqual(NTupleBoard gameBoard) {
@@ -350,8 +350,8 @@ class NTupleBoard
     }
 
     /**
-     * actualizamos la traduccion del tablero como entrada del perceptron, encriptado y normalizado. Tambien se
-     * actualiza el calculo de si este es un tablero fianl o no.
+     * actualizamos la traducción del tablero como entrada del perceptron, encriptado y normalizado. También se
+     * actualiza el calculo de si este es un tablero final o no.
      */
     public
     void updateInternalState() {
