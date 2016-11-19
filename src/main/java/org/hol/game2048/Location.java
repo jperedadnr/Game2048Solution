@@ -39,7 +39,7 @@ class Location {
             return false;
         }
         final Location other = (Location) obj;
-        return this.x == other.x && this.y == other.y;
+        return x == other.x && y == other.y;
     }
 
     /**
@@ -101,8 +101,8 @@ class Location {
     public
     int hashCode() {
         int hash = 7;
-        hash = 61 * hash + this.x;
-        hash = 61 * hash + this.y;
+        hash = 61 * hash + x;
+        hash = 61 * hash + y;
         return hash;
     }
 

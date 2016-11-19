@@ -35,7 +35,7 @@ class Tile
             setAlignment(Pos.CENTER);
 
             this.value = value;
-            this.merged = false;
+            merged = false;
             setText(Integer.toString(value));
         }
     }
@@ -130,7 +130,7 @@ class Tile
         // set the text with the new value and replace the old style ‘game-title-“-value with the new one
         if (Game2048.STEP >= 27) {
             getStyleClass().remove("game-tile-" + value);
-            this.value += another.value;
+            value += another.value;
             setText(Integer.toString(value));
             merged = true;
             getStyleClass().add("game-tile-" + value);

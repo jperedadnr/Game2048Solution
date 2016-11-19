@@ -52,7 +52,7 @@ class Game2048
         // TO-DO: Step 10. Load font when css is enabled
         if (STEP >= 10) {
             Font.loadFont(Game2048.class.getResource("ClearSans-Bold.ttf").toExternalForm(), 10.0);
-            InputStream              perceptronFile            = this.getClass().getResourceAsStream("/org/hol/game2048/trainedntuplas/Best.ser");
+            InputStream              perceptronFile            = getClass().getResourceAsStream("/org/hol/game2048/trainedntuplas/Best.ser");
             Function<Double, Double> activationFunction        = FunctionUtils.LINEAR;
             Function<Double, Double> derivedActivationFunction = FunctionUtils.LINEAR_DERIVED;
             boolean                  concurrency               = false;

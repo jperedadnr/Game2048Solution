@@ -45,7 +45,7 @@ class SimpleTile
             return false;
         }
         final SimpleTile other = (SimpleTile) obj;
-        return this.value == other.value;
+        return value == other.value;
     }
 
     /**
@@ -60,7 +60,7 @@ class SimpleTile
     public
     int hashCode() {
         int hash = 5;
-        hash = 97 * hash + this.value;
+        hash = 97 * hash + value;
         return hash;
     }
 

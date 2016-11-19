@@ -333,7 +333,7 @@ class Board
                     lOvrText.setText("Game over!");
                     lOvrText.getStyleClass().setAll("game-label", "game-lblOver");
                     buttonsOverlay.getChildren().setAll(bTry);
-                    this.getChildren().addAll(overlay, buttonsOverlay);
+                    getChildren().addAll(overlay, buttonsOverlay);
                 }
             });
 
@@ -343,7 +343,7 @@ class Board
                     lOvrText.setText("You win!");
                     lOvrText.getStyleClass().setAll("game-label", "game-lblWon");
                     buttonsOverlay.getChildren().setAll(bContinue, bTry);
-                    this.getChildren().addAll(overlay, buttonsOverlay);
+                    getChildren().addAll(overlay, buttonsOverlay);
                 }
             });
         }

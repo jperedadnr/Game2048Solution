@@ -82,8 +82,8 @@ class NTupleBoard
         }
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
-                SimpleTile t = this.tileAt(x, y);
-                if ((x < 3 && t.getValue() == this.tileAt(x + 1, y).getValue()) || ((y < 3) && t.getValue() == this.tileAt(x, y + 1).getValue())) {
+                SimpleTile t = tileAt(x, y);
+                if ((x < 3 && t.getValue() == tileAt(x + 1, y).getValue()) || ((y < 3) && t.getValue() == tileAt(x, y + 1).getValue())) {
                     return true;
                 }
             }
@@ -109,22 +109,13 @@ class NTupleBoard
             return false;
         }
         final NTupleBoard other = (NTupleBoard) obj;
-        if (this.partialScore != other.partialScore) {
-            return false;
-        }
-        if (this.iWin != other.iWin) {
-            return false;
-        }
-        if (this.canMove != other.canMove) {
-            return false;
-        }
-        if (this.isFull != other.isFull) {
-            return false;
-        }
-        if (this.needToAddTile != other.needToAddTile) {
-            return false;
-        }
-        return Arrays.deepEquals(this.tiles, other.tiles) && Objects.equals(this.availableSpaceList, other.availableSpaceList);
+        return partialScore == other.partialScore &&
+               iWin == other.iWin &&
+               canMove == other.canMove &&
+               isFull == other.isFull &&
+               needToAddTile == other.needToAddTile &&
+               Arrays.deepEquals(tiles, other.tiles) &&
+               Objects.equals(availableSpaceList, other.availableSpaceList);
     }
 
     @Override
@@ -255,13 +246,13 @@ class NTupleBoard
     public
     int hashCode() {
         int hash = 3;
-        hash = 29 * hash + Arrays.deepHashCode(this.tiles);
-        hash = 29 * hash + this.partialScore;
-        hash = 29 * hash + (this.iWin ? 1 : 0);
-        hash = 29 * hash + (this.canMove ? 1 : 0);
-        hash = 29 * hash + (this.isFull ? 1 : 0);
-        hash = 29 * hash + (this.needToAddTile ? 1 : 0);
-        hash = 29 * hash + Objects.hashCode(this.availableSpaceList);
+        hash = 29 * hash + Arrays.deepHashCode(tiles);
+        hash = 29 * hash + partialScore;
+        hash = 29 * hash + (iWin ? 1 : 0);
+        hash = 29 * hash + (canMove ? 1 : 0);
+        hash = 29 * hash + (isFull ? 1 : 0);
+        hash = 29 * hash + (needToAddTile ? 1 : 0);
+        hash = 29 * hash + Objects.hashCode(availableSpaceList);
         return hash;
     }
 
