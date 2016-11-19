@@ -305,6 +305,7 @@ class Board
 
         buttonsOverlay.setAlignment(Pos.CENTER);
         buttonsOverlay.setTranslateY(TOP_HEIGHT + GAP_HEIGHT + GRID_WIDTH / 2);
+        //noinspection IntegerDivisionInFloatingPointContext
         buttonsOverlay.setMinSize(GRID_WIDTH, GRID_WIDTH / 2);
         buttonsOverlay.setSpacing(10);
 

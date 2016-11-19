@@ -47,6 +47,7 @@ class Location {
      *
      * @return
      */
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     public
     double getLayoutX(int CELL_SIZE) {
         return (x * CELL_SIZE) + CELL_SIZE / 2;
@@ -59,6 +60,7 @@ class Location {
      */
     public
     double getLayoutY(int CELL_SIZE) {
+        //noinspection IntegerDivisionInFloatingPointContext
         return (y * CELL_SIZE) + CELL_SIZE / 2;
     }
 

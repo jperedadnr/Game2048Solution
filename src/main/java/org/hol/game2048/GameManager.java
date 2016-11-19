@@ -189,6 +189,7 @@ class GameManager
             SimpleTile[] line1,
             SimpleTile[] line2
     ) {
+        //noinspection ArrayEquality
         if (line1 == line2) {
             return true;
         } else if (line1.length != line2.length) {
