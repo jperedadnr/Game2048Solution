@@ -9,6 +9,7 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+//https://docs.gradle.org/current/userguide/standard_plugins.html
 apply plugin: 'java'
 compileJava {
     sourceCompatibility = '1.8'
