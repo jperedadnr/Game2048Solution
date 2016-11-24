@@ -3,8 +3,6 @@ package org.hol.game2048;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
-import java.util.Random;
-
 /**
  * JAVAONE 2014 - Create the Game 2048 with Java 8 and JavaFX [HOL3244]
  *
@@ -47,7 +45,7 @@ class Tile
     Tile newRandomTile() {
         // TO-DO. Step 7. Create random value, 90% chance 2, 10% 4
         if (Game2048.STEP >= 7) {
-            return newTile(new Random().nextDouble() < 0.9 ? 2 : 4);
+            return newTile(Math.random() < 0.9 ? 2 : 4);
         }
         return newTile(2);
     }
