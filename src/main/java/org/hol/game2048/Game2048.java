@@ -112,7 +112,7 @@ class Game2048
                             null,
                             computeParallelBestPossibleAction,
                             null
-                    );
+                    ).getAction();
                     gameManager.move(bestAction);
                 }
             });
