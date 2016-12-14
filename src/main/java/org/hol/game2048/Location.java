@@ -31,11 +31,11 @@ class Location {
      */
     @Override
     public
-    boolean equals(Object obj) {
-        if (obj == null) {
+    boolean equals( Object obj ) {
+        if ( obj == null ) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if ( getClass() != obj.getClass() ) {
             return false;
         }
         final Location other = (Location) obj;
@@ -47,10 +47,10 @@ class Location {
      *
      * @return
      */
-    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
+    @SuppressWarnings( "IntegerDivisionInFloatingPointContext" )
     public
-    double getLayoutX(int CELL_SIZE) {
-        return (x * CELL_SIZE) + CELL_SIZE / 2;
+    double getLayoutX( int CELL_SIZE ) {
+        return ( x * CELL_SIZE ) + CELL_SIZE / 2;
     }
 
     /**
@@ -59,9 +59,9 @@ class Location {
      * @return
      */
     public
-    double getLayoutY(int CELL_SIZE) {
+    double getLayoutY( int CELL_SIZE ) {
         //noinspection IntegerDivisionInFloatingPointContext
-        return (y * CELL_SIZE) + CELL_SIZE / 2;
+        return ( y * CELL_SIZE ) + CELL_SIZE / 2;
     }
 
     /**
@@ -76,7 +76,7 @@ class Location {
      * @param x
      */
     public
-    void setX(int x) {
+    void setX( int x ) {
         this.x = x;
     }
 
@@ -92,7 +92,7 @@ class Location {
      * @param y
      */
     public
-    void setY(int y) {
+    void setY( int y ) {
         this.y = y;
     }
 
@@ -122,9 +122,9 @@ class Location {
      * @return
      */
     public
-    Location offset(Direction direction) {
+    Location offset( Direction direction ) {
         // TO-DO: Step 12. Return the location of the tile in the selected direction
-        if (Game2048.STEP >= 11) {
+        if ( Game2048.STEP >= 11 ) {
             return new Location(x + direction.getX(), y + direction.getY());
         }
         return new Location(x, y);

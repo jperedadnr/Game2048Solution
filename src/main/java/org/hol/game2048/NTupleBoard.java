@@ -40,19 +40,19 @@ class NTupleBoard
      *
      */
     public static final int TILE_NUMBER = 4 * 4;
-    private List<Integer> availableSpaceList;
-    private boolean       canMove;
-    private boolean       iWin;
-    private boolean       isFull;
-    private boolean       needToAddTile;
-    private int           partialScore;
-    private SimpleTile[]  tiles;
+    private List< Integer > availableSpaceList;
+    private boolean         canMove;
+    private boolean         iWin;
+    private boolean         isFull;
+    private boolean         needToAddTile;
+    private int             partialScore;
+    private SimpleTile[]    tiles;
 
     /**
      * @param tiles
      */
     public
-    NTupleBoard(SimpleTile[] tiles) {
+    NTupleBoard( SimpleTile[] tiles ) {
         iWin = false;
         canMove = true;
         this.tiles = tiles;
@@ -60,15 +60,15 @@ class NTupleBoard
         isFull = false;
     }
 
-    void addPartialScore(int value) {
+    void addPartialScore( int value ) {
         partialScore += value;
     }
 
     private
-    List<Integer> calculateAvailableSpace() {
-        List<Integer> list = new ArrayList<>(16);
-        for (int i = 0; i < tiles.length; i++) {
-            if (tiles[i].isEmpty()) {
+    List< Integer > calculateAvailableSpace() {
+        List< Integer > list = new ArrayList<>(16);
+        for ( int i = 0; i < tiles.length; i++ ) {
+            if ( tiles[i].isEmpty() ) {
                 list.add(i);
             }
         }
@@ -77,13 +77,13 @@ class NTupleBoard
 
     private
     boolean calculateCanMove() {
-        if (!isFull) {
+        if ( !isFull ) {
             return true;
         }
-        for (int x = 0; x < 4; x++) {
-            for (int y = 0; y < 4; y++) {
+        for ( int x = 0; x < 4; x++ ) {
+            for ( int y = 0; y < 4; y++ ) {
                 SimpleTile t = tileAt(x, y);
-                if ((x < 3 && t.getValue() == tileAt(x + 1, y).getValue()) || ((y < 3) && t.getValue() == tileAt(x, y + 1).getValue())) {
+                if ( ( x < 3 && t.getValue() == tileAt(x + 1, y).getValue() ) || ( ( y < 3 ) && t.getValue() == tileAt(x, y + 1).getValue() ) ) {
                     return true;
                 }
             }
@@ -98,23 +98,19 @@ class NTupleBoard
      */
     @Override
     public
-    boolean equals(Object obj) {
-        if (this == obj) {
+    boolean equals( Object obj ) {
+        if ( this == obj ) {
             return true;
         }
-        if (obj == null) {
+        if ( obj == null ) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if ( getClass() != obj.getClass() ) {
             return false;
         }
         final NTupleBoard other = (NTupleBoard) obj;
-        return partialScore == other.partialScore &&
-               iWin == other.iWin &&
-               canMove == other.canMove &&
-               isFull == other.isFull &&
-               needToAddTile == other.needToAddTile &&
-               Arrays.deepEquals(tiles, other.tiles) &&
+        return partialScore == other.partialScore && iWin == other.iWin && canMove == other.canMove && isFull == other.isFull &&
+               needToAddTile == other.needToAddTile && Arrays.deepEquals(tiles, other.tiles) &&
                Objects.equals(availableSpaceList, other.availableSpaceList);
     }
 
@@ -127,7 +123,7 @@ class NTupleBoard
         copy.canMove = canMove;
         copy.isFull = isFull;
         copy.availableSpaceList = new ArrayList<>(TILE_NUMBER);
-        availableSpaceList.forEach((space) -> copy.availableSpaceList.add(space));
+        availableSpaceList.forEach(( space ) -> copy.availableSpaceList.add(space));
         copy.needToAddTile = needToAddTile;
         copy.partialScore = partialScore;
         return copy;
@@ -135,64 +131,64 @@ class NTupleBoard
 
     @Override
     public
-    SamplePointValue[] getNTuple(int nTupleIndex) {
-        switch (nTupleIndex) {
+    SamplePointValue[] getNTuple( int nTupleIndex ) {
+        switch ( nTupleIndex ) {
             // verticales
             case 0: {
-                return new SamplePointValue[]{tileAt(0, 0), tileAt(0, 1), tileAt(0, 2), tileAt(0, 3)};
+                return new SamplePointValue[] { tileAt(0, 0), tileAt(0, 1), tileAt(0, 2), tileAt(0, 3) };
             }
             case 1: {
-                return new SamplePointValue[]{tileAt(1, 0), tileAt(1, 1), tileAt(1, 2), tileAt(1, 3)};
+                return new SamplePointValue[] { tileAt(1, 0), tileAt(1, 1), tileAt(1, 2), tileAt(1, 3) };
             }
             case 2: {
-                return new SamplePointValue[]{tileAt(2, 0), tileAt(2, 1), tileAt(2, 2), tileAt(2, 3)};
+                return new SamplePointValue[] { tileAt(2, 0), tileAt(2, 1), tileAt(2, 2), tileAt(2, 3) };
             }
             case 3: {
-                return new SamplePointValue[]{tileAt(3, 0), tileAt(3, 1), tileAt(3, 2), tileAt(3, 3)};
+                return new SamplePointValue[] { tileAt(3, 0), tileAt(3, 1), tileAt(3, 2), tileAt(3, 3) };
             }
             // horizontales
             case 4: {
-                return new SamplePointValue[]{tileAt(0, 0), tileAt(1, 0), tileAt(2, 0), tileAt(3, 0)};
+                return new SamplePointValue[] { tileAt(0, 0), tileAt(1, 0), tileAt(2, 0), tileAt(3, 0) };
             }
             case 5: {
-                return new SamplePointValue[]{tileAt(0, 1), tileAt(1, 1), tileAt(2, 1), tileAt(3, 1)};
+                return new SamplePointValue[] { tileAt(0, 1), tileAt(1, 1), tileAt(2, 1), tileAt(3, 1) };
             }
             case 6: {
-                return new SamplePointValue[]{tileAt(0, 2), tileAt(1, 2), tileAt(2, 2), tileAt(3, 2)};
+                return new SamplePointValue[] { tileAt(0, 2), tileAt(1, 2), tileAt(2, 2), tileAt(3, 2) };
             }
             case 7: {
-                return new SamplePointValue[]{tileAt(0, 3), tileAt(1, 3), tileAt(2, 3), tileAt(3, 3)};
+                return new SamplePointValue[] { tileAt(0, 3), tileAt(1, 3), tileAt(2, 3), tileAt(3, 3) };
             }
             // cuadrados
             // primera fila de rectángulos
             case 8: {
-                return new SamplePointValue[]{tileAt(0, 0), tileAt(0, 1), tileAt(1, 1), tileAt(1, 0)};
+                return new SamplePointValue[] { tileAt(0, 0), tileAt(0, 1), tileAt(1, 1), tileAt(1, 0) };
             }
             case 9: {
-                return new SamplePointValue[]{tileAt(1, 0), tileAt(1, 1), tileAt(2, 1), tileAt(2, 0)};
+                return new SamplePointValue[] { tileAt(1, 0), tileAt(1, 1), tileAt(2, 1), tileAt(2, 0) };
             }
             case 10: {
-                return new SamplePointValue[]{tileAt(2, 0), tileAt(2, 1), tileAt(3, 1), tileAt(3, 0)};
+                return new SamplePointValue[] { tileAt(2, 0), tileAt(2, 1), tileAt(3, 1), tileAt(3, 0) };
             }
             //segunda fila de rectángulos
             case 11: {
-                return new SamplePointValue[]{tileAt(0, 1), tileAt(0, 2), tileAt(1, 2), tileAt(1, 1)};
+                return new SamplePointValue[] { tileAt(0, 1), tileAt(0, 2), tileAt(1, 2), tileAt(1, 1) };
             }
             case 12: {
-                return new SamplePointValue[]{tileAt(1, 1), tileAt(1, 2), tileAt(2, 2), tileAt(2, 1)};
+                return new SamplePointValue[] { tileAt(1, 1), tileAt(1, 2), tileAt(2, 2), tileAt(2, 1) };
             }
             case 13: {
-                return new SamplePointValue[]{tileAt(2, 1), tileAt(2, 2), tileAt(3, 2), tileAt(3, 1)};
+                return new SamplePointValue[] { tileAt(2, 1), tileAt(2, 2), tileAt(3, 2), tileAt(3, 1) };
             }
             //tercera fila de rectángulos
             case 14: {
-                return new SamplePointValue[]{tileAt(0, 2), tileAt(0, 3), tileAt(1, 3), tileAt(1, 2)};
+                return new SamplePointValue[] { tileAt(0, 2), tileAt(0, 3), tileAt(1, 3), tileAt(1, 2) };
             }
             case 15: {
-                return new SamplePointValue[]{tileAt(1, 2), tileAt(1, 3), tileAt(2, 3), tileAt(2, 2)};
+                return new SamplePointValue[] { tileAt(1, 2), tileAt(1, 3), tileAt(2, 3), tileAt(2, 2) };
             }
             case 16: {
-                return new SamplePointValue[]{tileAt(2, 2), tileAt(2, 3), tileAt(3, 3), tileAt(3, 2)};
+                return new SamplePointValue[] { tileAt(2, 2), tileAt(2, 3), tileAt(3, 3), tileAt(3, 2) };
             }
 
             default: {
@@ -213,13 +209,13 @@ class NTupleBoard
      * @param partialScore the partialScore to set
      */
     public
-    void setPartialScore(int partialScore) {
+    void setPartialScore( int partialScore ) {
         this.partialScore = partialScore;
     }
 
     @Override
     public
-    double getStateReward(int outputNeuron) {
+    double getStateReward( int outputNeuron ) {
         return partialScore;
     }
 
@@ -235,7 +231,7 @@ class NTupleBoard
      * @param tiles the tiles to set
      */
     public
-    void setTiles(SimpleTile[] tiles) {
+    void setTiles( SimpleTile[] tiles ) {
         this.tiles = tiles;
     }
 
@@ -248,10 +244,10 @@ class NTupleBoard
         int hash = 3;
         hash = 29 * hash + Arrays.deepHashCode(tiles);
         hash = 29 * hash + partialScore;
-        hash = 29 * hash + (iWin ? 1 : 0);
-        hash = 29 * hash + (canMove ? 1 : 0);
-        hash = 29 * hash + (isFull ? 1 : 0);
-        hash = 29 * hash + (needToAddTile ? 1 : 0);
+        hash = 29 * hash + ( iWin ? 1 : 0 );
+        hash = 29 * hash + ( canMove ? 1 : 0 );
+        hash = 29 * hash + ( isFull ? 1 : 0 );
+        hash = 29 * hash + ( needToAddTile ? 1 : 0 );
         hash = 29 * hash + Objects.hashCode(availableSpaceList);
         return hash;
     }
@@ -268,7 +264,7 @@ class NTupleBoard
      * @param canMove the canMove to set
      */
     public
-    void setCanMove(boolean canMove) {
+    void setCanMove( boolean canMove ) {
         this.canMove = canMove;
     }
 
@@ -279,9 +275,9 @@ class NTupleBoard
      * @return true si los 2 tableros son iguales topológicamente
      */
     public
-    boolean isEqual(NTupleBoard gameBoard) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (!tiles[i].equals(gameBoard.tiles[i])) {
+    boolean isEqual( NTupleBoard gameBoard ) {
+        for ( int i = 0; i < tiles.length; i++ ) {
+            if ( !tiles[i].equals(gameBoard.tiles[i]) ) {
                 return false;
             }
         }
@@ -306,7 +302,7 @@ class NTupleBoard
      * @param iWin the iWin to set
      */
     public
-    void setiWin(boolean iWin) {
+    void setiWin( boolean iWin ) {
         this.iWin = iWin;
     }
 
@@ -314,7 +310,7 @@ class NTupleBoard
      * @param needToAddTile the needToAddTile to set
      */
     public
-    void setNeedToAddTile(boolean needToAddTile) {
+    void setNeedToAddTile( boolean needToAddTile ) {
         this.needToAddTile = needToAddTile;
     }
 

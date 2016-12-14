@@ -46,9 +46,9 @@ enum Direction
      * @return
      */
     public static
-    Direction valueFor(KeyCode keyCode) {
+    Direction valueFor( KeyCode keyCode ) {
         // TO-DO: Step 11. return the direction of the arrow
-        if (Game2048.STEP >= 11) {
+        if ( Game2048.STEP >= 11 ) {
             return valueOf(keyCode.name());
         }
         return RIGHT;

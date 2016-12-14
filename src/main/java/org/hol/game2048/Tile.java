@@ -17,15 +17,15 @@ class Tile
     private int      value;
 
     private
-    Tile(int value) {
+    Tile( int value ) {
         // TO-DO. Step 6. Create tile
-        if (Game2048.STEP >= 6) {
+        if ( Game2048.STEP >= 6 ) {
             final int squareSize = Board.CELL_SIZE - 13;
             setMinSize(squareSize, squareSize);
             setMaxSize(squareSize, squareSize);
             setPrefSize(squareSize, squareSize);
             // TO-DO: Step 10. Load css and remove style
-            if (Game2048.STEP < 10) {
+            if ( Game2048.STEP < 10 ) {
                 setStyle("-fx-background-color: #c9c9c9;");
             } else {
                 getStyleClass().addAll("game-label", "game-tile-" + value);
@@ -44,7 +44,7 @@ class Tile
     public static
     Tile newRandomTile() {
         // TO-DO. Step 7. Create random value, 90% chance 2, 10% 4
-        if (Game2048.STEP >= 7) {
+        if ( Game2048.STEP >= 7 ) {
             return newTile(Math.random() < 0.9 ? 2 : 4);
         }
         return newTile(2);
@@ -56,7 +56,7 @@ class Tile
      * @return
      */
     public static
-    Tile newTile(int value) {
+    Tile newTile( int value ) {
         return new Tile(value);
     }
 
@@ -72,7 +72,7 @@ class Tile
      * @param location
      */
     public
-    void setLocation(Location location) {
+    void setLocation( Location location ) {
         this.location = location;
     }
 
@@ -88,7 +88,7 @@ class Tile
      * @param value
      */
     public
-    void setValue(int value) {
+    void setValue( int value ) {
         this.value = value;
     }
 
@@ -98,7 +98,7 @@ class Tile
      * @return
      */
     public
-    boolean isMergeable(Tile anotherTile) {
+    boolean isMergeable( Tile anotherTile ) {
         // TO-DO: Step 27. Check it this.tile can be merged with anotherTile
         return Game2048.STEP >= 27 && anotherTile != null && value == anotherTile.value;
     }
@@ -115,7 +115,7 @@ class Tile
      * @param merged
      */
     public
-    void setMerged(boolean merged) {
+    void setMerged( boolean merged ) {
         this.merged = merged;
     }
 
@@ -123,10 +123,10 @@ class Tile
      * @param another
      */
     public
-    void merge(Tile another) {
+    void merge( Tile another ) {
         // TO-DO: Step 27. Add to tile's value the value of the tile to be merged to,
         // set the text with the new value and replace the old style ‘game-title-“-value with the new one
-        if (Game2048.STEP >= 27) {
+        if ( Game2048.STEP >= 27 ) {
             getStyleClass().remove("game-tile-" + value);
             value += another.value;
             setText(Integer.toString(value));
