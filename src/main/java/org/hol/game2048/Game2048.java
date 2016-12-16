@@ -104,15 +104,12 @@ class Game2048
                     gameManager.move(dir);
                 } else if ( keyCode == KeyCode.SPACE && gameManager.getNTupleBoard().isCanMove() ) {
                     List< IAction > possibleActions = gameManager.listAllPossibleActions(gameManager.getNTupleBoard());
-                    Direction bestAction = (Direction) TDLambdaLearning.computeBestPossibleAction(
-                            gameManager,
+                    Direction bestAction = (Direction) TDLambdaLearning.computeBestPossibleAction(gameManager,
                             ELearningStyle.afterState,
                             gameManager.getNTupleBoard(),
                             possibleActions,
                             null,
-                            computeParallelBestPossibleAction,
-                            null
-                    ).getAction();
+                            computeParallelBestPossibleAction, null).getAction();
                     gameManager.move(bestAction);
                 }
             });

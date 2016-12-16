@@ -139,13 +139,11 @@ class GameManager
         // TO-DO: Step 19. Animate tiles movement from actual location to new location in 65ms
         if ( Game2048.STEP >= 19 ) {
             KeyValue kvX = new KeyValue(tile.layoutXProperty(),
-                                        newLocation.getLayoutX(Board.CELL_SIZE) - ( tile.getMinHeight() / 2 ),
-                                        Interpolator.EASE_OUT
-            );
+                    newLocation.getLayoutX(Board.CELL_SIZE) - ( tile.getMinHeight() / 2 ),
+                    Interpolator.EASE_OUT);
             KeyValue kvY = new KeyValue(tile.layoutYProperty(),
-                                        newLocation.getLayoutY(Board.CELL_SIZE) - ( tile.getMinHeight() / 2 ),
-                                        Interpolator.EASE_OUT
-            );
+                    newLocation.getLayoutY(Board.CELL_SIZE) - ( tile.getMinHeight() / 2 ),
+                    Interpolator.EASE_OUT);
 
             KeyFrame kfX = new KeyFrame(Duration.millis(65), kvX);
             KeyFrame kfY = new KeyFrame(Duration.millis(65), kvY);
@@ -484,8 +482,7 @@ class GameManager
                 } // TO-DO: Step 44. Use optionalTile to find pairs of mergeable tiles
                 else if ( Game2048.STEP >= 44 ) {
                     optionalTile(thisLoc).ifPresent(t1 -> optionalTile(thisLoc.offset(direction)).filter(t1::isMergeable)
-                                                                                                 .ifPresent(t2 -> numMergeableTile.incrementAndGet
-                                                                                                         ()));
+                            .ifPresent(t2 -> numMergeableTile.incrementAndGet()));
                 }
                 return 0;
             }));

@@ -239,9 +239,8 @@ class Board
         // and bind the lblScore text property with the gameScore property
         if ( Game2048.STEP >= 33 ) {
             lblPoints.textProperty()
-                     .bind(Bindings.createStringBinding(() -> ( gameMovePoints.get() > 0 ) ? "+".concat(Integer.toString(gameMovePoints.get())) : "",
-                                                        gameMovePoints.asObject()
-                     ));
+                    .bind(Bindings.createStringBinding(() -> ( gameMovePoints.get() > 0 ) ? "+".concat(Integer.toString(gameMovePoints.get())) : "",
+                            gameMovePoints.asObject()));
             lblScore.textProperty().bind(gameScoreProperty.asString());
         }
 
