@@ -5,7 +5,7 @@ import ar.edu.unrc.coeus.tdlearning.learning.ELearningStyle;
 import ar.edu.unrc.coeus.tdlearning.learning.TDLambdaLearning;
 import ar.edu.unrc.coeus.tdlearning.training.ntuple.NTupleSystem;
 import ar.edu.unrc.coeus.tdlearning.training.ntuple.SamplePointValue;
-import ar.edu.unrc.coeus.tdlearning.utils.FunctionUtils;
+import ar.edu.unrc.coeus.utils.FunctionUtils;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
