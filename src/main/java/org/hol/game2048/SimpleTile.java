@@ -28,13 +28,13 @@ class SimpleTile
      * @param num
      */
     public
-    SimpleTile( int num ) {
+    SimpleTile( final int num ) {
         value = num;
     }
 
     @Override
     public
-    boolean equals( Object obj ) {
+    boolean equals( final Object obj ) {
         if ( this == obj ) {
             return true;
         }
@@ -60,7 +60,7 @@ class SimpleTile
     public
     int hashCode() {
         int hash = 5;
-        hash = 97 * hash + value;
+        hash = ( 97 * hash ) + value;
         return hash;
     }
 

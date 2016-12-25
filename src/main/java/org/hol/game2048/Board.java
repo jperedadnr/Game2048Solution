@@ -31,14 +31,13 @@ class Board
     /**
      *
      */
-    public static final  int CELL_SIZE    = 128;
-    private static final int BORDER_WIDTH = ( 14 + 2 ) / 2;
-
+    public static final  int             CELL_SIZE          = 128;
+    private static final int             BORDER_WIDTH       = ( 14 + 2 ) / 2;
+    private static final int             GAP_HEIGHT         = 50;
     /**
      *
      */
-    public static final  int             GRID_WIDTH         = 4 * CELL_SIZE + 2 * BORDER_WIDTH;
-    private static final int             GAP_HEIGHT         = 50;
+    private static final int             GRID_WIDTH         = ( 4 * CELL_SIZE ) + ( 2 * BORDER_WIDTH );
     private static final int             TOP_HEIGHT         = 92;
     private final        Timeline        animateAddedPoints = new Timeline();
     private final        Button          bContinue          = new Button("Keep going");
@@ -51,7 +50,7 @@ class Board
     private final        Group           gridGroup          = new Group();
     private final        HBox            hBottom            = new HBox();
     private final        HBox            hMid               = new HBox();
-    private final        HBox            hTop               = new HBox(0);
+    private final        HBox            hTop               = new HBox((double) 0);
     private final        Label           lOvrText           = new Label();
     private final        Label           lblBest            = new Label("0");
     private final        Label           lblPoints          = new Label();
@@ -84,7 +83,7 @@ class Board
      * @param points
      */
     public
-    void addPoints( int points ) {
+    void addPoints( final int points ) {
         // TO-DO: Step 33. add points to score, bind lblScore to gameScore
         if ( Game2048.STEP >= 33 ) {
             gameMovePoints.set(gameMovePoints.get() + points);
@@ -96,7 +95,7 @@ class Board
      * @param tile
      */
     public
-    void addTile( Tile tile ) {
+    void addTile( final Tile tile ) {
         // TO-DO: Step 8. Specify tile's location before adding it to the gridGroup
         if ( Game2048.STEP >= 8 ) {
             moveTile(tile, tile.getLocation());
@@ -117,8 +116,8 @@ class Board
 
     private
     Rectangle createCell(
-            int i,
-            int j
+            final int i,
+            final int j
     ) {
         Rectangle cell;
         // TO-DO: Step 4. Create a squared rectangle, located over each coordinate (x,y), size CELL_SIZE
@@ -128,9 +127,9 @@ class Board
             cell.setStroke(Color.GREY);
         }
         // TO-DO: Step 10. Load css
-        if ( Game2048.STEP >= 10 && cell != null ) {
-            cell.setArcHeight(CELL_SIZE / 6d);
-            cell.setArcWidth(CELL_SIZE / 6d);
+        if ( ( Game2048.STEP >= 10 ) && ( cell != null ) ) {
+            cell.setArcHeight(CELL_SIZE / 6.0d);
+            cell.setArcWidth(CELL_SIZE / 6.0d);
             cell.getStyleClass().add("game-grid-cell");
         }
         return cell;
@@ -139,7 +138,7 @@ class Board
     private
     void createGrid() {
         // TO-DO: Step 5. Add 4x4 cells to the gridGroup
-        if ( Game2048.STEP >= 5 && Game2048.STEP < 25 ) {
+        if ( ( Game2048.STEP >= 5 ) && ( Game2048.STEP < 25 ) ) {
             for ( int i = 0; i < 4; i++ ) {
                 for ( int j = 0; j < 4; j++ ) {
                     gridGroup.getChildren().add(createCell(i, j));
@@ -168,7 +167,7 @@ class Board
         hBottom.setMaxSize(GRID_WIDTH, GRID_WIDTH);
         // TO-DO: Step 31. Clip the grid to avoid dropshadow effect moves it
         if ( Game2048.STEP >= 31 ) {
-            Rectangle rect = new Rectangle(GRID_WIDTH, GRID_WIDTH);
+            final Rectangle rect = new Rectangle(GRID_WIDTH, GRID_WIDTH);
             hBottom.setClip(rect);
         }
         hBottom.getChildren().add(gridGroup);
@@ -181,24 +180,24 @@ class Board
     void createScore() {
         // TO-DO: Step 3. Add the nodes to the top HBox
         if ( Game2048.STEP >= 3 ) {
-            Label lblTitle    = new Label("2048");
-            Label lblSubtitle = new Label("FX");
+            final Label lblTitle    = new Label("2048");
+            final Label lblSubtitle = new Label("FX");
 
-            HBox hFill = new HBox();
+            final HBox hFill = new HBox();
             HBox.setHgrow(hFill, Priority.ALWAYS);
 
-            VBox vScores = new VBox();
-            HBox hScores = new HBox(5);
+            final VBox vScores = new VBox();
+            final HBox hScores = new HBox(5);
 
-            Label lblTit = new Label("SCORE");
+            final Label lblTit = new Label("SCORE");
             vScore.getChildren().addAll(lblTit, lblScore);
 
-            VBox  vRecord    = new VBox(0);
-            Label lblTitBest = new Label("BEST");
+            final VBox  vRecord    = new VBox(0);
+            final Label lblTitBest = new Label("BEST");
             vRecord.getChildren().addAll(lblTitBest, lblBest);
 
             hScores.getChildren().addAll(vScore, vRecord);
-            VBox vFill = new VBox();
+            final VBox vFill = new VBox();
             VBox.setVgrow(vFill, Priority.ALWAYS);
             vScores.getChildren().addAll(hScores, vFill);
 
@@ -239,7 +238,7 @@ class Board
         // and bind the lblScore text property with the gameScore property
         if ( Game2048.STEP >= 33 ) {
             lblPoints.textProperty()
-                    .bind(Bindings.createStringBinding(() -> ( gameMovePoints.get() > 0 ) ? "+".concat(Integer.toString(gameMovePoints.get())) : "",
+                    .bind(Bindings.createStringBinding(() -> ( gameMovePoints.get() > 0 ) ? ( '+' + Integer.toString(gameMovePoints.get()) ) : "",
                             gameMovePoints.asObject()));
             lblScore.textProperty().bind(gameScoreProperty.asString());
         }
@@ -248,8 +247,8 @@ class Board
         if ( Game2048.STEP >= 34 ) {
             lblScore.textProperty().addListener(( ov, s, s1 ) -> {
                 lblPoints.setLayoutX(0);
-                double midScoreX = vScore.localToScene(vScore.getWidth() / 2d, 0).getX();
-                lblPoints.setLayoutX(lblPoints.sceneToLocal(midScoreX, 0).getX() - lblPoints.getWidth() / 2d);
+                final double midScoreX = vScore.localToScene(vScore.getWidth() / 2.0d, 0).getX();
+                lblPoints.setLayoutX(lblPoints.sceneToLocal(midScoreX, 0).getX() - ( lblPoints.getWidth() / 2.0d ));
             });
         }
         // TO-DO: Step 35. Add a timeline to translate the lblPoints in Y from 20 to 100
@@ -262,7 +261,7 @@ class Board
             final KeyFrame kfO0 = new KeyFrame(Duration.ZERO, kvO0);
             final KeyFrame kfY0 = new KeyFrame(Duration.ZERO, kvY0);
 
-            Duration       animationDuration = Duration.millis(600);
+            final Duration animationDuration = Duration.millis(600);
             final KeyFrame kfO1              = new KeyFrame(animationDuration, kvO1);
             final KeyFrame kfY1              = new KeyFrame(animationDuration, kvY1);
 
@@ -290,7 +289,7 @@ class Board
      * @param points
      */
     public
-    void setPoints( int points ) {
+    void setPoints( final int points ) {
         gameMovePoints.set(points);
     }
 
@@ -303,7 +302,7 @@ class Board
         overlay.getChildren().setAll(lOvrText);
 
         buttonsOverlay.setAlignment(Pos.CENTER);
-        buttonsOverlay.setTranslateY(TOP_HEIGHT + GAP_HEIGHT + GRID_WIDTH / 2);
+        buttonsOverlay.setTranslateY(TOP_HEIGHT + GAP_HEIGHT + ( GRID_WIDTH / 2 ));
         //noinspection IntegerDivisionInFloatingPointContext
         buttonsOverlay.setMinSize(GRID_WIDTH, GRID_WIDTH / 2);
         buttonsOverlay.setSpacing(10);
@@ -355,13 +354,13 @@ class Board
      */
     public
     void moveTile(
-            Tile tile,
-            Location location
+            final Tile tile,
+            final Location location
     ) {
         // TO-DO: Step 8. Translate the tile to the selected location
         if ( Game2048.STEP >= 8 ) {
-            double layoutX = location.getLayoutX(CELL_SIZE) - ( tile.getMinWidth() / 2 );
-            double layoutY = location.getLayoutY(CELL_SIZE) - ( tile.getMinHeight() / 2 );
+            final double layoutX = location.getLayoutX(CELL_SIZE) - ( tile.getMinWidth() / 2 );
+            final double layoutY = location.getLayoutY(CELL_SIZE) - ( tile.getMinHeight() / 2 );
 
             tile.setLayoutX(layoutX);
             tile.setLayoutY(layoutY);
@@ -380,7 +379,7 @@ class Board
      * @param gameOver
      */
     public
-    void setGameOver( boolean gameOver ) {
+    void setGameOver( final boolean gameOver ) {
         gameOverProperty.set(gameOver);
     }
 
@@ -388,7 +387,7 @@ class Board
      * @param won
      */
     public
-    void setGameWin( boolean won ) {
+    void setGameWin( final boolean won ) {
         gameWonProperty.set(won);
     }
 }

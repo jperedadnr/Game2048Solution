@@ -17,8 +17,8 @@ class Location {
      */
     public
     Location(
-            int x,
-            int y
+            final int x,
+            final int y
     ) {
         this.x = x;
         this.y = y;
@@ -31,7 +31,7 @@ class Location {
      */
     @Override
     public
-    boolean equals( Object obj ) {
+    boolean equals( final Object obj ) {
         if ( obj == null ) {
             return false;
         }
@@ -39,7 +39,7 @@ class Location {
             return false;
         }
         final Location other = (Location) obj;
-        return x == other.x && y == other.y;
+        return ( x == other.x ) && ( y == other.y );
     }
 
     /**
@@ -49,8 +49,8 @@ class Location {
      */
     @SuppressWarnings( "IntegerDivisionInFloatingPointContext" )
     public
-    double getLayoutX( int CELL_SIZE ) {
-        return ( x * CELL_SIZE ) + CELL_SIZE / 2;
+    double getLayoutX( final int CELL_SIZE ) {
+        return ( x * CELL_SIZE ) + ( CELL_SIZE / 2 );
     }
 
     /**
@@ -59,9 +59,9 @@ class Location {
      * @return
      */
     public
-    double getLayoutY( int CELL_SIZE ) {
+    double getLayoutY( final int CELL_SIZE ) {
         //noinspection IntegerDivisionInFloatingPointContext
-        return ( y * CELL_SIZE ) + CELL_SIZE / 2;
+        return ( y * CELL_SIZE ) + ( CELL_SIZE / 2 );
     }
 
     /**
@@ -76,7 +76,7 @@ class Location {
      * @param x
      */
     public
-    void setX( int x ) {
+    void setX( final int x ) {
         this.x = x;
     }
 
@@ -92,7 +92,7 @@ class Location {
      * @param y
      */
     public
-    void setY( int y ) {
+    void setY( final int y ) {
         this.y = y;
     }
 
@@ -103,8 +103,8 @@ class Location {
     public
     int hashCode() {
         int hash = 7;
-        hash = 61 * hash + x;
-        hash = 61 * hash + y;
+        hash = ( 61 * hash ) + x;
+        hash = ( 61 * hash ) + y;
         return hash;
     }
 
@@ -113,7 +113,7 @@ class Location {
      */
     public
     boolean isValidFor() {
-        return x >= 0 && x < 4 && y >= 0 && y < 4;
+        return ( x >= 0 ) && ( x < 4 ) && ( y >= 0 ) && ( y < 4 );
     }
 
     /**
@@ -122,7 +122,7 @@ class Location {
      * @return
      */
     public
-    Location offset( Direction direction ) {
+    Location offset( final Direction direction ) {
         // TO-DO: Step 12. Return the location of the tile in the selected direction
         if ( Game2048.STEP >= 11 ) {
             return new Location(x + direction.getX(), y + direction.getY());

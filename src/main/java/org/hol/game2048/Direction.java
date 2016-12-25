@@ -33,8 +33,8 @@ enum Direction
     private final int y;
 
     Direction(
-            int x,
-            int y
+            final int x,
+            final int y
     ) {
         this.x = x;
         this.y = y;
@@ -46,7 +46,7 @@ enum Direction
      * @return
      */
     public static
-    Direction valueFor( KeyCode keyCode ) {
+    Direction valueFor( final KeyCode keyCode ) {
         // TO-DO: Step 11. return the direction of the arrow
         if ( Game2048.STEP >= 11 ) {
             return valueOf(keyCode.name());
