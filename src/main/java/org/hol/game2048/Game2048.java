@@ -71,6 +71,7 @@ class Game2048
             nTupleSystem = new NTupleSystem(allSamplePointPossibleValues, nTuplesLength, activationFunction, derivedActivationFunction, concurrency);
             try {
                 nTupleSystem.load(perceptronFile);
+                perceptronFile.close();
             } catch ( IOException | ClassNotFoundException ex ) {
                 Logger.getLogger(Game2048.class.getName()).log(Level.SEVERE, null, ex);
             }
