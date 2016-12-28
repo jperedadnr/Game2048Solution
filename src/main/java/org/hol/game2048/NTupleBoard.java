@@ -39,12 +39,12 @@ class NTupleBoard
     /**
      *
      */
-    public static final int TILE_NUMBER = 4 << 2;
-    private List< Integer > availableSpaceList;
+    public static final int             TILE_NUMBER        = 4 << 2;
+    private             List< Integer > availableSpaceList = null;
     private boolean         canMove;
     private boolean         iWin;
     private boolean         isFull;
-    private boolean         needToAddTile;
+    private boolean needToAddTile = false;
     private int             partialScore;
     private SimpleTile[]    tiles;
 

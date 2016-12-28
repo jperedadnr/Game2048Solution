@@ -44,20 +44,20 @@ class Board
     private final        Button          bTry               = new Button("Try again");
     private final        HBox            buttonsOverlay     = new HBox();
     private final        IntegerProperty gameMovePoints     = new SimpleIntegerProperty(0);
-    private final        BooleanProperty gameOverProperty   = new SimpleBooleanProperty(false);
-    private final        IntegerProperty gameScoreProperty  = new SimpleIntegerProperty(0);
-    private final        BooleanProperty gameWonProperty    = new SimpleBooleanProperty(false);
-    private final        Group           gridGroup          = new Group();
-    private final        HBox            hBottom            = new HBox();
-    private final        HBox            hMid               = new HBox();
-    private final        HBox            hTop               = new HBox((double) 0);
-    private final        Label           lOvrText           = new Label();
-    private final        Label           lblBest            = new Label("0");
-    private final        Label           lblPoints          = new Label();
-    private final        Label           lblScore           = new Label("0");
-    private final        HBox            overlay            = new HBox();
-    private final        BooleanProperty resetGame          = new SimpleBooleanProperty(false);
-    private final        VBox            vGame              = new VBox(0);
+    private final BooleanProperty gameOverProperty  = new SimpleBooleanProperty(false);
+    private final IntegerProperty gameScoreProperty = new SimpleIntegerProperty(0);
+    private final BooleanProperty gameWonProperty   = new SimpleBooleanProperty(false);
+    private final Group           gridGroup         = new Group();
+    private final HBox            hBottom           = new HBox();
+    private final HBox            hMid              = new HBox();
+    private final HBox            hTop              = new HBox(0);
+    private final Label           lOvrText          = new Label();
+    private final Label           lblBest           = new Label("0");
+    private final Label           lblPoints         = new Label();
+    private final Label           lblScore          = new Label("0");
+    private final HBox            overlay           = new HBox();
+    private final BooleanProperty resetGame         = new SimpleBooleanProperty(false);
+    private final VBox            vGame             = new VBox(0);
     private final        VBox            vScore             = new VBox(0);
 
     /**

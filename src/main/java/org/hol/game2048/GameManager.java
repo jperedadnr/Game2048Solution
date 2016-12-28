@@ -33,10 +33,10 @@ class GameManager
     private final List< Location >      locations         = new ArrayList<>();
     private final Set< Tile >           mergedToBeRemoved = new HashSet<>();
     private final NTupleSystem nTupleSystem;
-    private final ParallelTransition parallelTransition = new ParallelTransition();
-    private          Board   board;
-    private volatile boolean movingTiles;
-    private          int     tilesWereMoved;
+    private final    ParallelTransition parallelTransition = new ParallelTransition();
+    private          Board              board              = null;
+    private volatile boolean            movingTiles        = false;
+    private          int                tilesWereMoved     = 0;
 
     /**
      * GameManager is a Group containing a Board that holds a grid and the score a Map holds the location of the tiles
@@ -328,9 +328,8 @@ class GameManager
     NTupleBoard getNTupleBoard() {
         final SimpleTile[] tiles = new SimpleTile[TILE_NUMBER];
         IntStream.range(0, 4).boxed().forEach(y -> IntStream.range(0, 4).boxed().forEach(x -> {
-            final SimpleTile simpleTile;
-            final Tile       t = gameGrid.get(new Location(x, y));
-            simpleTile = ( t == null ) ? new SimpleTile() : new SimpleTile(t.getValue());
+            final Tile       t          = gameGrid.get(new Location(x, y));
+            final SimpleTile simpleTile = ( t == null ) ? new SimpleTile() : new SimpleTile(t.getValue());
             tiles[x + ( y * 4 )] = simpleTile;
         }));
         final NTupleBoard newBoard = new NTupleBoard(tiles);
@@ -374,8 +373,8 @@ class GameManager
      */
     public
     NTupleBoard left( final NTupleBoard board ) {
-        boolean needAddTile = false;
         board.setPartialScore(0);
+        boolean needAddTile = false;
         for ( int i = 0; i < 4; i++ ) {
             final SimpleTile[] line   = getLine(i, board);
             final SimpleTile[] merged = mergeLine(moveLine(line), board);
@@ -698,8 +697,8 @@ class GameManager
         if ( l.isEmpty() ) {
             return oldLine;
         } else {
-            final SimpleTile[] newLine = new SimpleTile[4];
             ensureSize(l, 4);
+            final SimpleTile[] newLine = new SimpleTile[4];
             for ( int i = 0; i < 4; i++ ) {
                 newLine[i] = l.removeFirst();
             }
@@ -739,7 +738,6 @@ class GameManager
             final int angle,
             final NTupleBoard original
     ) {
-        final SimpleTile[] rotatedTiles = new SimpleTile[TILE_NUMBER];
 
         int offsetX = 3;
         int offsetY = 3;
@@ -749,9 +747,10 @@ class GameManager
             offsetX = 0;
         }
 
-        final double rad = toRadians(angle);
-        final int    cos = (int) cos(rad);
-        final int    sin = (int) sin(rad);
+        final double       rad          = toRadians(angle);
+        final int          cos          = (int) cos(rad);
+        final int          sin          = (int) sin(rad);
+        final SimpleTile[] rotatedTiles = new SimpleTile[TILE_NUMBER];
         for ( int x = 0; x < 4; x++ ) {
             for ( int y = 0; y < 4; y++ ) {
                 final int newX = ( ( x * cos ) - ( y * sin ) ) + offsetX;

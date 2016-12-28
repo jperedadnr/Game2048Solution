@@ -33,10 +33,10 @@ class Game2048
     /**
      *
      */
-    public static final int STEP = 45;
-    private boolean      computeParallelBestPossibleAction;
-    private GameManager  gameManager;
-    private NTupleSystem nTupleSystem;
+    public static final int          STEP                              = 45;
+    private             boolean      computeParallelBestPossibleAction = false;
+    private             GameManager  gameManager                       = null;
+    private             NTupleSystem nTupleSystem                      = null;
 
     /**
      * @param args the command line arguments
@@ -105,8 +105,7 @@ class Game2048
                     gameManager.move(dir);
                 } else if ( ( keyCode == KeyCode.SPACE ) && gameManager.getNTupleBoard().isCanMove() ) {
                     final List< IAction > possibleActions = gameManager.listAllPossibleActions(gameManager.getNTupleBoard());
-                    final Direction bestAction = (Direction) TDLambdaLearning.computeBestPossibleAction(gameManager,
-                            ELearningStyle.afterState,
+                    final Direction bestAction = (Direction) TDLambdaLearning.computeBestPossibleAction(gameManager, ELearningStyle.AFTER_STATE,
                             gameManager.getNTupleBoard(),
                             possibleActions,
                             null,

@@ -12,9 +12,9 @@ public
 class Tile
         extends Label {
 
-    private Location location;
-    private boolean  merged;
-    private int      value;
+    private Location location = null;
+    private boolean  merged   = false;
+    private int      value    = 0;
 
     private
     Tile( final int value ) {
