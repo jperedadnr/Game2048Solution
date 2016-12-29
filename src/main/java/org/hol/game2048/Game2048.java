@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,7 @@ class Game2048
      *
      */
     public static final int          STEP                              = 45;
+    private final       Random       random                            = new Random();
     private             boolean      computeParallelBestPossibleAction = false;
     private             GameManager  gameManager                       = null;
     private             NTupleSystem nTupleSystem                      = null;
@@ -108,8 +110,7 @@ class Game2048
                     final Direction bestAction = (Direction) TDLambdaLearning.computeBestPossibleAction(gameManager, ELearningStyle.AFTER_STATE,
                             gameManager.getNTupleBoard(),
                             possibleActions,
-                            null,
-                            computeParallelBestPossibleAction, null).getAction();
+                            null, computeParallelBestPossibleAction, random, null).getAction();
                     gameManager.move(bestAction);
                 }
             });
@@ -119,5 +120,4 @@ class Game2048
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 }
