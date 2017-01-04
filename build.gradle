@@ -2,7 +2,7 @@ group 'ar.edu.unrc'
 version '1.0'
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.2'
+    gradleVersion = '3.3'
 }
 
 tasks.withType(JavaCompile) {
