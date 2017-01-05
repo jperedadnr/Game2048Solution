@@ -2,7 +2,7 @@ group 'ar.edu.unrc'
 version '1.0'
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.3'
+    gradleVersion = '3.2'
 }
 
 tasks.withType(JavaCompile) {
@@ -39,7 +39,7 @@ jfxmobile {
 
 dependencies {
     compile group: 'ar.edu.unrc', name: 'coeus', version: '1.0.0'
-    compile group: 'org.encog', name: 'encog-core', version: '3.2.0'
+    compile group: 'org.encog', name: 'encog-core', version: '3.3.0'
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'
 }
