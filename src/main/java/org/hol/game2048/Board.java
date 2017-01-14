@@ -65,6 +65,7 @@ class Board
      */
     public
     Board() {
+        super();
         // TO-DO: Step 3. Call create score
         if ( Game2048.STEP >= 3 ) {
             createScore();

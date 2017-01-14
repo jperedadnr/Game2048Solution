@@ -20,6 +20,7 @@ class Location {
             final int x,
             final int y
     ) {
+        super();
         this.x = x;
         this.y = y;
     }

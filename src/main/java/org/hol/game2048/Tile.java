@@ -18,6 +18,7 @@ class Tile
 
     private
     Tile( final int value ) {
+        super();
         // TO-DO. Step 6. Create tile
         if ( Game2048.STEP >= 6 ) {
             final int squareSize = Board.CELL_SIZE - 13;

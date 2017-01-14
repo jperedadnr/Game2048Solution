@@ -53,6 +53,7 @@ class NTupleBoard
      */
     public
     NTupleBoard( final SimpleTile[] tiles ) {
+        super();
         iWin = false;
         canMove = true;
         this.tiles = tiles;

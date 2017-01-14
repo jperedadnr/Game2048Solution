@@ -49,6 +49,7 @@ class GameManager
      */
     public
     GameManager( final NTupleSystem nTupleSystem ) {
+        super();
         this.nTupleSystem = nTupleSystem;
 
         // TO-DO: Step 2. Create board and it to gameManager

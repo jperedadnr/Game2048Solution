@@ -29,6 +29,7 @@ class SimpleTile
      */
     public
     SimpleTile( final int num ) {
+        super();
         value = num;
     }
 
