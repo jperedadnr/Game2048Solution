@@ -10,7 +10,6 @@ tasks.withType(JavaCompile) {
 }
 
 //https://docs.gradle.org/current/userguide/standard_plugins.html
-apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'findbugs'
@@ -36,6 +35,17 @@ apply plugin: 'org.javafxports.jfxmobile'
 jfxmobile {
     mainClassName = 'org.hol.game2048.Game2048'
 }
+//
+//manifest {
+//    attributes 'Implementation-Title': rootProject.name,
+//            'Application-Name': 'Visual 2048',
+//            'Implementation-Version': version,
+//            'Built-By': 'Lucia Bressan, Renzo Bianchini, Franco Gastón Pellegrini',
+//            'Built-Date': new Date(),
+//            'Built-Java': System.getProperty('java.version'),
+//            'Main-Class': mainClassName,
+//            'Sealed': 'true'
+//}
 
 dependencies {
     compile group: 'ar.edu.unrc', name: 'coeus', version: '1.0.0'
