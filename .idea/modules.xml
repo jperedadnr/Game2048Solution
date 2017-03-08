@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus.game2048.visual.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus.game2048.visual.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_android.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_android.iml" group="coeus.game2048.visual" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_desktop.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_desktop.iml" group="coeus.game2048.visual" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_embedded.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_embedded.iml" group="coeus.game2048.visual" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_ios.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_ios.iml" group="coeus.game2048.visual" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_main.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_main.iml" group="coeus.game2048.visual" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_test.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus.game2048.visual_test.iml" group="coeus.game2048.visual" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus_main.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus_main.iml" group="coeus" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coeus_test.iml" filepath="$PROJECT_DIR$/.idea/modules/coeus_test.iml" group="coeus" />
+    </modules>
+  </component>
+</project>
